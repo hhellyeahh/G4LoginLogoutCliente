@@ -37,7 +37,7 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <Hyperlink fx:id="hlSignUp" focusTraversable="false" layoutX="210.0" layoutY="202.0" prefHeight="18.0" prefWidth="45.0" text="Sign up">
+            <Hyperlink fx:id="hlSignUp" focusTraversable="false" layoutX="210.0" layoutY="202.0" onAction="#handleSignUpHyperlinkAction" prefHeight="18.0" prefWidth="45.0" text="Sign up">
                <font>
                   <Font size="10.0" />
                </font>
@@ -47,7 +47,17 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <Button fx:id="btnAccept" focusTraversable="false" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleAcceptButtonAction" style="-fx-background-color: #94BCB6;" text="Log in" />
+            <Button fx:id="btnLogIn" focusTraversable="false" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleLogInButtonAction" style="-fx-background-color: #94BCB6;" text="Log in" />
+            <Label fx:id="lblUsername" layoutX="78.0" layoutY="142.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPassword" layoutX="78.0" layoutY="194.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

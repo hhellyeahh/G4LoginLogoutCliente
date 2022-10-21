@@ -11,6 +11,7 @@ package view;
  */
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -34,19 +39,87 @@ public class LogInController implements Initializable {
     @FXML
     private TextField tfUsername;
     @FXML
-    private TextField pfPassword;
+    private Label lblUsername;
+    @FXML
+    private PasswordField pfPassword;
+    @FXML
+    private Label lblPassword;
     @FXML
     private Hyperlink hlSignUp;
     @FXML
-    private Button btnAccept;
+    private Button btnLogIn;
 
     /**
-     * Handle Action event on Accept Button
+     *
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //Tooltips
+        tfUsername.setTooltip(new Tooltip("Username"));
+        pfPassword.setTooltip(new Tooltip("Password"));
+        hlSignUp.setTooltip(new Tooltip("Go to sign up"));
+
+        //Set event handlers
+        this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
+        this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
+
+        tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+            if (" ".equals(evt.getCharacter())) {
+                evt.consume();
+                lblUsername.setText("We don't allow spaces in this field.");
+            }
+        });
+
+        pfPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+            if (" ".equals(evt.getCharacter())) {
+                evt.consume();
+                lblPassword.setText("We don't allow spaces in this field.");
+            }
+        });
+
+        //Disable login button.
+        this.btnLogIn.setDisable(true);
+    }
+
+    /**
+     * 
+     * @param observable
+     * @param oldValue
+     * @param newValue 
+     */
+    private void handleFieldsTextChange(ObservableValue observable,
+            String oldValue,
+            String newValue) {
+        
+        if 
+        //If any of these are empty the continue button will be disabled. 
+        //If all of them are written it will be enabled.
+        if (!(this.tfUsername.getText().equals(oldValue))) {
+            this.lblUsername.setText("");
+            this.lblPassword.setText("");
+        }
+    }
+
+    /**
+     * Handle Action event on SignUp Hyperlink
      *
      * @param event The Action event object
      */
     @FXML
-    private void handleAcceptButtonAction(ActionEvent event) {
+    private void handleSignUpHyperlinkAction(ActionEvent event) {
+        Stage stage = (Stage) this.hlSignUp.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Handle Action event on LogIn Button
+     *
+     * @param event The Action event object
+     */
+    @FXML
+    private void handleLogInButtonAction(ActionEvent event) {
         try {
             if (this.tfUsername.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
                 throw new Exception("The username and password fields are empty.");
@@ -66,29 +139,5 @@ public class LogInController implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
-    }
-
-    /*
-    @FXML
-    private void handleSignUpHyperlinkAction(ActionEvent event) {
-        try {
-            if (hlSignUp) {
-                Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
-
-                Scene scene = new Scene(root);
-
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-            } else {
-                throw new Exception("Error.");
-            }
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
-        }
-    }*/
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 }
