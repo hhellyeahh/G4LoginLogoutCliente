@@ -104,12 +104,40 @@ public class FXMLSignUpController implements Initializable {
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
+        //Maximum character permitted in username field will be 20, fullname and email 30 and password fields 8 minimum, 24 maximum
+        if (tfUsername.getText().length() > 20) {
+            String s = tfUsername.getText().substring(0, 20);
+            tfUsername.setText(s);
+        }
+        if (tfEmail.getText().length() > 30) {
+            String s = tfEmail.getText().substring(0, 30);
+            tfEmail.setText(s);
+        }
+        if (tfFullName.getText().length() > 30) {
+            String s = tfFullName.getText().substring(0, 30);
+            tfFullName.setText(s);
+        }
+        if (pfPassword.getText().length() > 24) {
+            String s = pfPassword.getText().substring(0, 24);
+            pfPassword.setText(s);
+        }
+        if (pfRepeatPassword.getText().length() > 24) {
+            String s = pfRepeatPassword.getText().substring(0, 24);
+            pfRepeatPassword.setText(s);
+        }
+
         //If any of these are empty the continue button will be disabled. If all of them are written it will be enabled.
-        if (!(tfUsername.getText().equals(oldValue))) {
+        if (!(tfUsername.getText().equals(oldValue)) || !(tfEmail.getText().equals(oldValue)) || !(pfPassword.getText().equals(oldValue)) || !(pfRepeatPassword.getText().equals(oldValue))) {
             lblUsername.setText("");
             lblEmail.setText("");
             lblPassword.setText("");
             lblRepeatPassword.setText("");
+        }
+
+        //If the password on both fields is not the same, the background of both will change to red colour and a red text will appear below the text field with a “Passwords are not the same.”, when it's the same, the background will recover the normal colour and the label will disappear. Continue button will only be enabled when both fields have the same password.
+        if (true) {
+
+        } else {
         }
     }
 
