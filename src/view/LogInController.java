@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -40,13 +41,12 @@ public class LogInController implements Initializable {
     private Button btnAccept;
 
     /**
-     * Hanle Action event on Aceptar Button
+     * Handle Action event on Accept Button
      *
      * @param event The Action event object
      */
     @FXML
     private void handleAcceptButtonAction(ActionEvent event) {
-
         try {
             if (this.tfUsername.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
                 throw new Exception("The username and password fields are empty.");
@@ -56,18 +56,39 @@ public class LogInController implements Initializable {
                 Scene scene = new Scene(root);
 
                 Stage stage = new Stage();
+
+                stage.setResizable(false);
+                stage.setTitle("LogOut");
+                stage.getIcons().add(new Image("resources/login/icon.png"));
                 stage.setScene(scene);
                 stage.show();
             }
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
-
     }
 
+    /*
+    @FXML
+    private void handleSignUpHyperlinkAction(ActionEvent event) {
+        try {
+            if (hlSignUp) {
+                Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+
+                Scene scene = new Scene(root);
+
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                throw new Exception("Error.");
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
+        }
+    }*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
 }

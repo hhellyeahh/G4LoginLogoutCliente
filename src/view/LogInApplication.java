@@ -9,18 +9,24 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
  *
  * @author Leire, Zulu
  */
-public class LogInFXApplication extends Application {
+public class LogInApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
         Scene scene = new Scene(root);
+     
+        stage.setResizable(false);
+        stage.setTitle("LogIn");
+        stage.getIcons().add(new Image("resources/login/icon.png"));
+        
         stage.setScene(scene);
         stage.show();
     }

@@ -10,18 +10,23 @@
    <children>
       <Pane layoutX="200.0" layoutY="150.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #c5e5e5;">
          <children>
-            <TextField fx:id="tfMessage" alignment="CENTER" layoutX="70.0" layoutY="121.0" prefHeight="29.0" prefWidth="268.0" text="Welcome to G4 Team Members!" />
-            <Button fx:id="btnLogOut" layoutX="172.0" layoutY="195.0" mnemonicParsing="false" style="-fx-background-color: #94BCB6;" text="Log Out" />
+            <TextField fx:id="tfMessage" alignment="CENTER" focusTraversable="false" layoutX="70.0" layoutY="121.0" prefHeight="29.0" prefWidth="268.0" text="Welcome to G4 Team Members!" />
+            <Button fx:id="btnLogOut" focusTraversable="false" layoutX="172.0" layoutY="195.0" mnemonicParsing="false" style="-fx-background-color: #94BCB6;" text="Log Out" />
          </children>
       </Pane>
-      <ImageView fitHeight="600.0" fitWidth="291.0" layoutX="-22.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="345.0" fitWidth="249.0" layoutX="-21.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Leaf01.png" />
+            <Image url="@../resources/login/hojaLogout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="468.0" fitWidth="656.0" layoutX="538.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="365.0" fitWidth="421.0" layoutX="552.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Leaf.png" />
+            <Image url="@../resources/login/hojasSignup.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="373.0" fitWidth="354.0" layoutX="563.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/login/hojaLogin.png" />
          </image>
       </ImageView>
    </children>
