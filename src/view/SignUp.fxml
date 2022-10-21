@@ -20,11 +20,11 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsername" focusTraversable="false" layoutX="50.0" layoutY="170.0" prefHeight="30.0" prefWidth="300.0" promptText="Username" />
-            <TextField fx:id="txtFullName" focusTraversable="false" layoutX="50.0" layoutY="220.0" prefHeight="30.0" prefWidth="300.0" promptText="Full Name" />
-            <TextField fx:id="txtEmail" focusTraversable="false" layoutX="50.0" layoutY="270.0" prefHeight="30.0" prefWidth="300.0" promptText="Email Address" />
-            <PasswordField fx:id="txtPassword" focusTraversable="false" layoutX="50.0" layoutY="320.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" />
-            <PasswordField fx:id="txtRepeatPassword" focusTraversable="false" layoutX="50.0" layoutY="370.0" prefHeight="30.0" prefWidth="300.0" promptText="Repeat Password" />
+            <TextField fx:id="txtUsername" layoutX="50.0" layoutY="170.0" prefHeight="30.0" prefWidth="300.0" promptText="Username" />
+            <TextField fx:id="txtFullName" layoutX="50.0" layoutY="220.0" prefHeight="30.0" prefWidth="300.0" promptText="Full Name" />
+            <TextField fx:id="txtEmail" layoutX="50.0" layoutY="270.0" prefHeight="30.0" prefWidth="300.0" promptText="Email Address" />
+            <PasswordField fx:id="txtPassword" layoutX="50.0" layoutY="320.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" />
+            <PasswordField fx:id="txtRepeatPassword" layoutX="50.0" layoutY="370.0" prefHeight="30.0" prefWidth="300.0" promptText="Repeat Password" />
             <Text layoutX="50.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?">
                <font>
                   <Font size="15.0" />
@@ -35,7 +35,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Button fx:id="btnContinue" focusTraversable="false" layoutX="162.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleButtonContinueAction" style="-fx-background-color: #94BCB6;" text="Continue">
+            <Button fx:id="btnContinue" layoutX="162.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleButtonContinueAction" style="-fx-background-color: #94BCB6;" text="Continue">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,10 +45,14 @@
                   <Image url="@../resources/img/user.png" />
                </image>
             </ImageView>
-            <Hyperlink fx:id="hlLogin" focusTraversable="false" layoutX="218.0" layoutY="407.0" onAction="#handleHyperlinkLogInAction" text="Log in" textFill="#6883b0">
+            <Hyperlink fx:id="hlLogin" layoutX="218.0" layoutY="407.0" onAction="#handleHyperlinkLogInAction" text="Log in" textFill="#6883b0">
                <font>
                   <Font size="15.0" />
                </font></Hyperlink>
+            <Label fx:id="usernameLabel" layoutX="50.0" layoutY="200.0" textFill="RED" />
+            <Label fx:id="emailLabel" layoutX="50.0" layoutY="300.0" textFill="RED" />
+            <Label fx:id="passwordLabel" layoutX="50.0" layoutY="350.0" textFill="RED" />
+            <Label fx:id="repeatPasswordLabel" layoutX="50.0" layoutY="399.0" textFill="RED" />
          </children>
       </Pane>
       <ImageView fitHeight="469.0" fitWidth="358.0" layoutX="23.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">

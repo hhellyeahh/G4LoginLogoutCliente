@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -46,6 +47,14 @@ public class FXMLSignUpController implements Initializable {
     private Hyperlink hlLogin;
     @FXML
     private Button btnContinue;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label passwordLabel;
+    @FXML
+    private Label repeatPasswordLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,21 +76,25 @@ public class FXMLSignUpController implements Initializable {
         txtUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
+                usernameLabel.setText("We don't allow spaces in this field.");
             }
         });
         txtEmail.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
+                emailLabel.setText("We don't allow spaces in this field.");
             }
         });
         txtPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
+                passwordLabel.setText("We don't allow spaces in this field.");
             }
         });
         txtRepeatPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
+                repeatPasswordLabel.setText("We don't allow spaces in this field.");
             }
         });
         //Disable continue button.
@@ -92,7 +105,12 @@ public class FXMLSignUpController implements Initializable {
             String oldValue,
             String newValue) {
         //If any of these are empty the continue button will be disabled. If all of them are written it will be enabled.
-
+        if (!(txtUsername.getText().equals(oldValue))) {
+            usernameLabel.setText("");
+            emailLabel.setText("");
+            passwordLabel.setText("");
+            repeatPasswordLabel.setText("");
+        }
     }
 
     /**
@@ -102,7 +120,8 @@ public class FXMLSignUpController implements Initializable {
      */
     @FXML
     private void handleHyperlinkLogInAction(ActionEvent event) {
-
+        Stage stage = (Stage) this.hlLogin.getScene().getWindow();
+        stage.close();
     }
 
     /**
