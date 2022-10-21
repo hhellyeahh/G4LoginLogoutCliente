@@ -10,6 +10,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,9 @@ public class SignUpApplication extends Application {
         //Crea una escena a partir del Parent
         Scene scene = new Scene(root);
         //Establece la escena en el escenario (Stage) y la muestra
+        stage.setResizable(false);
+        stage.setTitle("SignUp");
+        stage.getIcons().add(new Image("resources/img/icon.png"));
         stage.setScene(scene);
         stage.show();
     }
