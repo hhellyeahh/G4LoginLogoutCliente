@@ -34,67 +34,67 @@ import javax.xml.stream.EventFilter;
 public class FXMLSignUpController implements Initializable {
 
     @FXML
-    private TextField txtUsername;
+    private TextField tfUsername;
     @FXML
-    private TextField txtFullName;
+    private TextField tfFullName;
     @FXML
-    private TextField txtEmail;
+    private TextField tfEmail;
     @FXML
-    private PasswordField txtPassword;
+    private PasswordField pfPassword;
     @FXML
-    private PasswordField txtRepeatPassword;
+    private PasswordField pfRepeatPassword;
     @FXML
     private Hyperlink hlLogin;
     @FXML
     private Button btnContinue;
     @FXML
-    private Label usernameLabel;
+    private Label lblUsername;
     @FXML
-    private Label emailLabel;
+    private Label lblEmail;
     @FXML
-    private Label passwordLabel;
+    private Label lblPassword;
     @FXML
-    private Label repeatPasswordLabel;
+    private Label lblRepeatPassword;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Tooltips
-        txtUsername.setTooltip(new Tooltip("Username"));
-        txtFullName.setTooltip(new Tooltip("Full name"));
-        txtEmail.setTooltip(new Tooltip("Email"));
-        txtPassword.setTooltip(new Tooltip("Password"));
-        txtRepeatPassword.setTooltip(new Tooltip("Repeat password"));
+        tfUsername.setTooltip(new Tooltip("Username"));
+        tfFullName.setTooltip(new Tooltip("Full name"));
+        tfEmail.setTooltip(new Tooltip("Email"));
+        pfPassword.setTooltip(new Tooltip("Password"));
+        pfRepeatPassword.setTooltip(new Tooltip("Repeat password"));
         hlLogin.setTooltip(new Tooltip("Back to login"));
 
         //Set event handlers
-        this.txtUsername.textProperty().addListener(this::handleFieldsTextChange);
-        this.txtFullName.textProperty().addListener(this::handleFieldsTextChange);
-        this.txtEmail.textProperty().addListener(this::handleFieldsTextChange);
-        this.txtPassword.textProperty().addListener(this::handleFieldsTextChange);
-        this.txtRepeatPassword.textProperty().addListener(this::handleFieldsTextChange);
+        this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
+        this.tfFullName.textProperty().addListener(this::handleFieldsTextChange);
+        this.tfEmail.textProperty().addListener(this::handleFieldsTextChange);
+        this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
+        this.pfRepeatPassword.textProperty().addListener(this::handleFieldsTextChange);
 
-        txtUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+        tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
-                usernameLabel.setText("We don't allow spaces in this field.");
+                lblUsername.setText("We don't allow spaces in this field.");
             }
         });
-        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+        tfEmail.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
-                emailLabel.setText("We don't allow spaces in this field.");
+                lblEmail.setText("We don't allow spaces in this field.");
             }
         });
-        txtPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+        pfPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
-                passwordLabel.setText("We don't allow spaces in this field.");
+                lblPassword.setText("We don't allow spaces in this field.");
             }
         });
-        txtRepeatPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+        pfRepeatPassword.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
-                repeatPasswordLabel.setText("We don't allow spaces in this field.");
+                lblRepeatPassword.setText("We don't allow spaces in this field.");
             }
         });
         //Disable continue button.
@@ -105,11 +105,11 @@ public class FXMLSignUpController implements Initializable {
             String oldValue,
             String newValue) {
         //If any of these are empty the continue button will be disabled. If all of them are written it will be enabled.
-        if (!(txtUsername.getText().equals(oldValue))) {
-            usernameLabel.setText("");
-            emailLabel.setText("");
-            passwordLabel.setText("");
-            repeatPasswordLabel.setText("");
+        if (!(tfUsername.getText().equals(oldValue))) {
+            lblUsername.setText("");
+            lblEmail.setText("");
+            lblPassword.setText("");
+            lblRepeatPassword.setText("");
         }
     }
 
