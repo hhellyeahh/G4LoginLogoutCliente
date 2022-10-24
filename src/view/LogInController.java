@@ -9,6 +9,9 @@ package view;
  *
  * @author Leire, Zulu
  */
+
+import classes.LoginLogout;
+import classes.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -125,7 +128,18 @@ public class LogInController implements Initializable {
      */
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException {
-
+        
+        
+      User loginUser  = new User();
+      loginUser.setLogin(tfUsername.getText());
+      loginUser.setPassword(pfPassword.getText().toString());
+      
+      LoginLogout clientLoginLogout = new LogInLogOutInterfaceImplementation();
+      loginUser = clientLoginLogout.login(loginUser); 
+        
+        
+        
+        
         Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
 
         Scene scene = new Scene(root);
