@@ -24,6 +24,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import javax.xml.stream.EventFilter;
 
@@ -126,7 +127,16 @@ public class FXMLSignUpController implements Initializable {
             pfRepeatPassword.setText(s);
         }
 
-        //If any of these are empty the continue button will be disabled. If all of them are written it will be enabled.
+        //If any of the fields are empty the continue button will be disabled. If all of them are written it will be enabled.
+        if (tfUsername.getText().isEmpty() || tfFullName.getText().isEmpty() || tfEmail.getText().isEmpty() || pfPassword.getText().isEmpty() || pfRepeatPassword.getText().isEmpty()) {
+            btnContinue.setDisable(true);
+            pfPassword.setStyle("-fx-control-inner-background: white;");
+            pfRepeatPassword.setStyle("-fx-control-inner-background: white;");
+        } else {
+            btnContinue.setDisable(false);
+        }
+
+        //control de textos de label
         if (!(tfUsername.getText().equals(oldValue)) || !(tfEmail.getText().equals(oldValue)) || !(pfPassword.getText().equals(oldValue)) || !(pfRepeatPassword.getText().equals(oldValue))) {
             lblUsername.setText("");
             lblEmail.setText("");
@@ -134,11 +144,46 @@ public class FXMLSignUpController implements Initializable {
             lblRepeatPassword.setText("");
         }
 
-        //If the password on both fields is not the same, the background of both will change to red colour and a red text will appear below the text field with a “Passwords are not the same.”, when it's the same, the background will recover the normal colour and the label will disappear. Continue button will only be enabled when both fields have the same password.
-        if (true) {
-
-        } else {
+        //If the password on both fields is not the same, the background of both will change to red colour and a red text will 
+        //appear below the text field with a “Passwords are not the same.”, when it's the same, the background will recover the 
+        //normal colour and the label will disappear. Continue button will only be enabled when both fields have the same password.
+        if (!pfRepeatPassword.getText().isEmpty()) {
+            if (!(pfPassword.getText().equals(pfRepeatPassword.getText()))) {
+                pfPassword.setStyle("-fx-control-inner-background: #ff7f7f;");
+                pfRepeatPassword.setStyle("-fx-control-inner-background: #ff7f7f;");
+                lblPassword.setText("Passwords do not match.");
+                btnContinue.setDisable(true);
+            } else {
+                pfPassword.setStyle("-fx-control-inner-background: white;");
+                pfRepeatPassword.setStyle("-fx-control-inner-background: white;");
+                btnContinue.setDisable(false);
+            }
         }
+
+        //If the password fields have less than 8 characters a red text will appear below the text field with a “At least 8 characters are needed.”, 
+        //when the user tries to write more than 24 characters a red text will appear below the text field with a “Only 24 character maximum.”
+        if (!pfPassword.getText().isEmpty()) {
+            if (pfPassword.getText().length() < 8) {
+                lblPassword.setText("At least 8 characters are needed.");
+            }
+
+            if (pfPassword.getText().length() > 23) {
+                lblPassword.setText(" Only 24 character maximum");
+            }
+        }
+        if (!pfRepeatPassword.getText().isEmpty()) {
+            if (pfRepeatPassword.getText().length() < 8) {
+                lblRepeatPassword.setText("At least 8 characters are needed.");
+            } else if (pfPassword.getText().length() == 8) {
+                lblRepeatPassword.setText("");
+            }
+
+            if (pfRepeatPassword.getText().length() > 23) {
+                lblRepeatPassword.setText(" Only 24 character maximum");
+            }
+        }
+        
+        
     }
 
     /**
