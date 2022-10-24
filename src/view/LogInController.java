@@ -7,8 +7,9 @@ package view;
 
 /**
  *
- * @author 2dam
+ * @author Leire, Zulu
  */
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
@@ -18,9 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -84,22 +83,28 @@ public class LogInController implements Initializable {
     }
 
     /**
-     * 
+     *
      * @param observable
      * @param oldValue
-     * @param newValue 
+     * @param newValue
      */
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
-        
-        if 
         //If any of these are empty the continue button will be disabled. 
         //If all of them are written it will be enabled.
-        if (!(this.tfUsername.getText().equals(oldValue))) {
+        if (!(this.tfUsername.getText().equals(oldValue)) || !(this.pfPassword.getText().equals(oldValue))) {
             this.lblUsername.setText("");
             this.lblPassword.setText("");
         }
+
+        //Enable login button.
+        if (tfUsername.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
+            this.btnLogIn.setDisable(true);
+        } else {
+            this.btnLogIn.setDisable(false);
+        }
+
     }
 
     /**
@@ -119,25 +124,18 @@ public class LogInController implements Initializable {
      * @param event The Action event object
      */
     @FXML
-    private void handleLogInButtonAction(ActionEvent event) {
-        try {
-            if (this.tfUsername.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
-                throw new Exception("The username and password fields are empty.");
-            } else {
-                Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
+    private void handleLogInButtonAction(ActionEvent event) throws IOException {
 
-                Scene scene = new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
 
-                Stage stage = new Stage();
+        Scene scene = new Scene(root);
 
-                stage.setResizable(false);
-                stage.setTitle("LogOut");
-                stage.getIcons().add(new Image("resources/login/icon.png"));
-                stage.setScene(scene);
-                stage.show();
-            }
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
-        }
+        Stage stage = new Stage();
+
+        stage.setResizable(false);
+        stage.setTitle("LogOut");
+        stage.getIcons().add(new Image("resources/login/icon.png"));
+        stage.setScene(scene);
+        stage.show();
     }
 }
