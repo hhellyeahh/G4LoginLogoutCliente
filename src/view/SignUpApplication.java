@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author unaib
  */
 public class SignUpApplication extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         //Carga el documento FXML y obtiene un objeto Parent
@@ -39,5 +39,5 @@ public class SignUpApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

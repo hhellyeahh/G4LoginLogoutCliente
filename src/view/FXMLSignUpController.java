@@ -5,16 +5,20 @@
  */
 package view;
 
+import classes.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -74,6 +78,12 @@ public class FXMLSignUpController implements Initializable {
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
         this.pfRepeatPassword.textProperty().addListener(this::handleFieldsTextChange);
 
+        /**
+         * We created an event that doesn´t allow input spaces, when the user
+         * writes a space a red text will appear below the text field with a “We
+         * don't allow spaces in this field.”, when another letter is written
+         * the text will disappear.
+         */
         tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
@@ -105,7 +115,10 @@ public class FXMLSignUpController implements Initializable {
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
-        //Maximum character permitted in username field will be 20, fullname and email 30 and password fields 8 minimum, 24 maximum
+        /**
+         * Maximum character permitted in username field will be 20, fullname
+         * and email 30 and password fields 8 minimum, 24 maximum
+         */
         if (tfUsername.getText().length() > 20) {
             String s = tfUsername.getText().substring(0, 20);
             tfUsername.setText(s);
@@ -127,7 +140,10 @@ public class FXMLSignUpController implements Initializable {
             pfRepeatPassword.setText(s);
         }
 
-        //If any of the fields are empty the continue button will be disabled. If all of them are written it will be enabled.
+        /**
+         * If any of the fields are empty the continue button will be disabled.
+         * If all of them are written it will be enabled.
+         */
         if (tfUsername.getText().isEmpty() || tfFullName.getText().isEmpty() || tfEmail.getText().isEmpty() || pfPassword.getText().isEmpty() || pfRepeatPassword.getText().isEmpty()) {
             btnContinue.setDisable(true);
             pfPassword.setStyle("-fx-control-inner-background: white;");
@@ -136,7 +152,7 @@ public class FXMLSignUpController implements Initializable {
             btnContinue.setDisable(false);
         }
 
-        //control de textos de label
+        //Control label texts, when another letter is written the text will disappear.
         if (!(tfUsername.getText().equals(oldValue)) || !(tfEmail.getText().equals(oldValue)) || !(pfPassword.getText().equals(oldValue)) || !(pfRepeatPassword.getText().equals(oldValue))) {
             lblUsername.setText("");
             lblEmail.setText("");
@@ -144,9 +160,14 @@ public class FXMLSignUpController implements Initializable {
             lblRepeatPassword.setText("");
         }
 
-        //If the password on both fields is not the same, the background of both will change to red colour and a red text will 
-        //appear below the text field with a “Passwords are not the same.”, when it's the same, the background will recover the 
-        //normal colour and the label will disappear. Continue button will only be enabled when both fields have the same password.
+        /**
+         * If the password on both fields is not the same, the background of
+         * both will change to red colour and a red text will appear below the
+         * text field with a “Passwords are not the same.”, when it's the same,
+         * the background will recover the normal colour and the label will
+         * disappear. Continue button will only be enabled when both fields have
+         * the same password.
+         */
         if (!pfRepeatPassword.getText().isEmpty()) {
             if (!(pfPassword.getText().equals(pfRepeatPassword.getText()))) {
                 pfPassword.setStyle("-fx-control-inner-background: #ff7f7f;");
@@ -160,11 +181,19 @@ public class FXMLSignUpController implements Initializable {
             }
         }
 
-        //If the password fields have less than 8 characters a red text will appear below the text field with a “At least 8 characters are needed.”, 
-        //when the user tries to write more than 24 characters a red text will appear below the text field with a “Only 24 character maximum.”
+        /**
+         * If the password fields have less than 8 characters a red text will
+         * appear below the text field with a “At least 8 characters are
+         * needed.”, when the user tries to write more than 24 characters a red
+         * text will appear below the text field with a “Only 24 character
+         * maximum.”
+         */
         if (!pfPassword.getText().isEmpty()) {
             if (pfPassword.getText().length() < 8) {
                 lblPassword.setText("At least 8 characters are needed.");
+                btnContinue.setDisable(true);
+            } else {
+                btnContinue.setDisable(false);
             }
 
             if (pfPassword.getText().length() > 23) {
@@ -174,16 +203,17 @@ public class FXMLSignUpController implements Initializable {
         if (!pfRepeatPassword.getText().isEmpty()) {
             if (pfRepeatPassword.getText().length() < 8) {
                 lblRepeatPassword.setText("At least 8 characters are needed.");
+                btnContinue.setDisable(true);
             } else if (pfPassword.getText().length() == 8) {
                 lblRepeatPassword.setText("");
+                btnContinue.setDisable(false);
             }
 
             if (pfRepeatPassword.getText().length() > 23) {
                 lblRepeatPassword.setText(" Only 24 character maximum");
             }
         }
-        
-        
+
     }
 
     /**
@@ -195,6 +225,28 @@ public class FXMLSignUpController implements Initializable {
     private void handleHyperlinkLogInAction(ActionEvent event) {
         Stage stage = (Stage) this.hlLogin.getScene().getWindow();
         stage.close();
+        
+        //Carga el documento FXML y obtiene un objeto Parent
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Error en la aplicacion");
+            alert.showAndWait();
+        }
+        //Crea una escena a partir del Parent
+        Scene scene = new Scene(root);
+        //Establece la escena en el escenario (Stage) y la muestra
+        Stage stageLogin = new Stage();
+        stageLogin.setResizable(false);
+        stageLogin.setTitle("LogIn");
+        stageLogin.getIcons().add(new Image("resources/img/icon.png"));
+        stageLogin.setScene(scene);
+        stageLogin.show();
     }
 
     /**
@@ -204,6 +256,19 @@ public class FXMLSignUpController implements Initializable {
      */
     @FXML
     private void handleButtonContinueAction(ActionEvent event) throws Exception {
+        /**
+         * On the other hand, in the Full Name TextField, it will only be
+         * checked that there are no spaces before or after it.
+         */
+        
+        User newUser = new User();
+        newUser.setLogin(tfUsername.getText());
+        newUser.setFullName(tfFullName.getText().trim());
+        newUser.setEmail(tfEmail.getText());
+        newUser.setPassword(pfPassword.getText());
+        
+        System.out.print(newUser.getLogin() + "\n" + newUser.getEmail() + "\n" + newUser.getFullName()+ "\n" + newUser.getPassword());
+/*
         //Carga el documento FXML y obtiene un objeto Parent
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
         //Crea una escena a partir del Parent
@@ -215,6 +280,6 @@ public class FXMLSignUpController implements Initializable {
         stage.getIcons().add(new Image("resources/img/icon.png"));
         stage.setScene(scene);
         stage.show();
-
+*/
     }
 }
