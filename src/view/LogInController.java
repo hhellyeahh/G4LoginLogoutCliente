@@ -10,11 +10,12 @@ package view;
  * @author Leire, Zulu
  */
 
-import classes.LoginLogout;
-import classes.User;
+import classes.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -134,7 +135,14 @@ public class LogInController implements Initializable {
       loginUser.setLogin(tfUsername.getText());
       loginUser.setPassword(pfPassword.getText().toString());
       
-      LoginLogout clientLoginLogout = new LogInLogOutInterfaceImplementation();
+      LoginLogout clientLoginLogout = null;
+       /* 
+        try {
+            clientLoginLogout = Factory.getLoginLogout();
+        } catch (UnknownModelTypeException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     */
       loginUser = clientLoginLogout.login(loginUser); 
         
         
