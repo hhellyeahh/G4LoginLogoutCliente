@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LogInController implements Initializable {
@@ -36,8 +37,6 @@ public class LogInController implements Initializable {
     private TextField tfUsername;
     @FXML
     private Label lblUsername;
-    @FXML
-    private Label lblLogin;
     @FXML
     private PasswordField pfPassword;
     @FXML
@@ -76,7 +75,9 @@ public class LogInController implements Initializable {
                 lblPassword.setText("We don't allow spaces in this field.");
             }
         });
+
         tfUsername.requestFocus();
+
         //Disable login button.
         this.btnLogIn.setDisable(true);
     }
@@ -126,7 +127,7 @@ public class LogInController implements Initializable {
 
         User loginUser = new User();
         loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText().toString());
+        loginUser.setPassword(pfPassword.getText());
 
         LoginLogout clientLoginLogout = null;
         /* 
@@ -137,18 +138,19 @@ public class LogInController implements Initializable {
         }
          */
         //  loginUser = clientLoginLogout.login(loginUser);
-
-        Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
-
-        Scene scene = new Scene(root);
-
         Stage stage = new Stage();
-        
-        stage.setUserData(loginUser);
-        stage.setResizable(false);
-        stage.setTitle("LogOut");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
-        stage.setScene(scene);
-        stage.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogOut.fxml"));
+
+        Parent root = (Parent) loader.load();
+
+        LogOutController controller = (LogOutController) loader.getController();
+
+        controller.setStage(stage);
+
+        controller.initData(loginUser);
+
+        controller.initialize(root);
+
     }
 }

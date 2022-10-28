@@ -5,15 +5,13 @@
  */
 package view;
 
+import classes.User;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,26 +21,39 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
  *
  * @author Leire, Zulu
  */
-public class LogOutController implements Initializable {
+public class LogOutController {
+
+    private Stage stage;
+    private User user;
 
     @FXML
     private TextField tfMessage;
     @FXML
     private Button btnLogOut;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(Parent root) {
         //Tooltips
         this.tfMessage.setTooltip(new Tooltip("Message"));
         this.btnLogOut.setTooltip(new Tooltip("Log Out"));
-        //this.tfMessage.setText(this.);
-        //Set event handlers
+
+        this.tfMessage.setText("Welcome back: " + user.getLogin() + ".");
+        Scene scene = new Scene(root);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+
+        stage.setResizable(false);
+        stage.setTitle("LogOut");
+        stage.getIcons().add(new Image("resources/login/icon.png"));
+        stage.setScene(scene);
+        stage.show();
     }
 
     //TODO boton cerrar alert
@@ -54,10 +65,9 @@ public class LogOutController implements Initializable {
         Alert alert = new Alert(AlertType.NONE, "Do you want to log out or exit the application?", chooseLogOut, chooseExit);
 
         alert.setTitle("Log out or exit");
-       
+
         Optional<ButtonType> option = alert.showAndWait();
-      
-        
+
         if (option.get() == chooseLogOut) {
             Stage stage = (Stage) this.btnLogOut.getScene().getWindow();
             stage.close();
@@ -69,10 +79,25 @@ public class LogOutController implements Initializable {
             Stage stage2 = new Stage();
             stage2.setResizable(false);
             stage2.setScene(scene2);
-            stage2.show(); 
-            
+            stage2.show();
+
         } else if (option.get() == chooseExit) {
             Platform.exit();
+        }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
+    public void initData(User user){
+        try{
+            if(user == null){
+                throw new IncorrectUserException();
+            }
+            this.user = user;
+        }catch(IncorrectUserException iue){
+            
         }
     }
 }
