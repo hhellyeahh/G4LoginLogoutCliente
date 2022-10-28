@@ -9,13 +9,10 @@ package view;
  *
  * @author Leire, Zulu
  */
-
 import classes.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,16 +30,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Leire, Zulu
- */
 public class LogInController implements Initializable {
 
     @FXML
     private TextField tfUsername;
     @FXML
     private Label lblUsername;
+    @FXML
+    private Label lblLogin;
     @FXML
     private PasswordField pfPassword;
     @FXML
@@ -81,7 +76,7 @@ public class LogInController implements Initializable {
                 lblPassword.setText("We don't allow spaces in this field.");
             }
         });
-
+        tfUsername.requestFocus();
         //Disable login button.
         this.btnLogIn.setDisable(true);
     }
@@ -108,7 +103,6 @@ public class LogInController implements Initializable {
         } else {
             this.btnLogIn.setDisable(false);
         }
-
     }
 
     /**
@@ -129,31 +123,28 @@ public class LogInController implements Initializable {
      */
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException {
-        
-        
-      User loginUser  = new User();
-      loginUser.setLogin(tfUsername.getText());
-      loginUser.setPassword(pfPassword.getText().toString());
-      
-      LoginLogout clientLoginLogout = null;
-       /* 
+
+        User loginUser = new User();
+        loginUser.setLogin(tfUsername.getText());
+        loginUser.setPassword(pfPassword.getText().toString());
+
+        LoginLogout clientLoginLogout = null;
+        /* 
         try {
             clientLoginLogout = Factory.getLoginLogout();
         } catch (UnknownModelTypeException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-     */
-      loginUser = clientLoginLogout.login(loginUser); 
-        
-        
-        
-        
+         */
+        //  loginUser = clientLoginLogout.login(loginUser);
+
         Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
 
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
-
+        
+        stage.setUserData(loginUser);
         stage.setResizable(false);
         stage.setTitle("LogOut");
         stage.getIcons().add(new Image("resources/login/icon.png"));

@@ -25,19 +25,19 @@
                   <Image url="@../resources/login/logInIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="184.0" layoutY="72.0" text="Login">
+            <Label fx:id="lblLogin" layoutX="184.0" layoutY="72.0" text="Login">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <PasswordField fx:id="pfPassword" focusTraversable="false" layoutX="78.0" layoutY="164.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
-            <TextField fx:id="tfUsername" focusTraversable="false" layoutX="80.0" layoutY="113.0" prefHeight="30.0" prefWidth="250.0" promptText="Username" />
+            <PasswordField fx:id="pfPassword" layoutX="78.0" layoutY="164.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
+            <TextField fx:id="tfUsername" layoutX="80.0" layoutY="113.0" prefHeight="30.0" prefWidth="250.0" promptText="Username" />
             <Text layoutX="78.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You do not have an account ?">
                <font>
                   <Font size="10.0" />
                </font>
             </Text>
-            <Hyperlink fx:id="hlSignUp" focusTraversable="false" layoutX="210.0" layoutY="202.0" onAction="#handleSignUpHyperlinkAction" prefHeight="18.0" prefWidth="45.0" text="Sign up">
+            <Hyperlink fx:id="hlSignUp" layoutX="210.0" layoutY="202.0" onAction="#handleSignUpHyperlinkAction" prefHeight="18.0" prefWidth="45.0" text="Sign up">
                <font>
                   <Font size="10.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <Button fx:id="btnLogIn" focusTraversable="false" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleLogInButtonAction" style="-fx-background-color: #94BCB6;" text="Log in" />
+            <Button fx:id="btnLogIn" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleLogInButtonAction" style="-fx-background-color: #94BCB6;" text="Log in" />
             <Label fx:id="lblUsername" layoutX="78.0" layoutY="142.0" textFill="RED">
                <font>
                   <Font size="10.0" />
