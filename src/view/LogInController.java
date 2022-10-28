@@ -9,7 +9,6 @@ package view;
  *
  * @author Leire, Zulu
  */
-
 import classes.*;
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +22,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -38,6 +39,8 @@ import javafx.stage.Stage;
  * @author Leire, Zulu
  */
 public class LogInController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger("view");
 
     @FXML
     private TextField tfUsername;
@@ -59,6 +62,8 @@ public class LogInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        LOGGER.info("initializing the window");
+
         //Tooltips
         tfUsername.setTooltip(new Tooltip("Username"));
         pfPassword.setTooltip(new Tooltip("Password"));
@@ -84,6 +89,8 @@ public class LogInController implements Initializable {
 
         //Disable login button.
         this.btnLogIn.setDisable(true);
+        LOGGER.info("window initialized");
+
     }
 
     /**
@@ -118,8 +125,19 @@ public class LogInController implements Initializable {
      */
     @FXML
     private void handleSignUpHyperlinkAction(ActionEvent event) {
-        Stage stage = (Stage) this.hlSignUp.getScene().getWindow();
-        stage.close();
+        LOGGER.info("Probando a abrir ventana de registro");
+        try {
+            Stage stage = (Stage) this.hlSignUp.getScene().getWindow();
+            stage.close();
+            LOGGER.info("ventana de registro abierta");
+
+        } catch (Exception ex) {
+            showErrorAlert("No se ha podido abrir la ventana");
+            LOGGER.log(Level.SEVERE,
+                    ex.getMessage());
+
+        }
+
     }
 
     /**
@@ -128,36 +146,55 @@ public class LogInController implements Initializable {
      * @param event The Action event object
      */
     @FXML
-    private void handleLogInButtonAction(ActionEvent event) throws IOException {
-        
-        
-      User loginUser  = new User();
-      loginUser.setLogin(tfUsername.getText());
-      loginUser.setPassword(pfPassword.getText().toString());
-      
-      LoginLogout clientLoginLogout = null;
-       /* 
+    private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
+
+        try {
+            String usernameString = tfUsername.toString().toLowerCase();
+            if (usernameString.contains(" ")) {
+                IllegalUsernameException ex = new IllegalUsernameException("Username cant contain blank spaces");
+                throw ex;
+            }
+
+        } catch (Exception e) {
+             showErrorAlert("Username can´t contain blank spaces");
+            LOGGER.log(Level.SEVERE, e.getMessage());
+        }
+
+        LOGGER.info("inicio de envio información al servidor");
+        User loginUser = new User();
+        loginUser.setLogin(tfUsername.getText());
+        loginUser.setPassword(pfPassword.getText().toString());
+
+        LoginLogout clientLoginLogout = null;
+        /* 
         try {
             clientLoginLogout = Factory.getLoginLogout();
         } catch (UnknownModelTypeException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-     */
-      loginUser = clientLoginLogout.login(loginUser); 
-        
-        
-        
-        
+         */
+        loginUser = clientLoginLogout.login(loginUser);
+
         Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
 
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
-
+        
+        stage.setUserData(loginUser);
         stage.setResizable(false);
         stage.setTitle("LogOut");
         stage.getIcons().add(new Image("resources/login/icon.png"));
         stage.setScene(scene);
         stage.show();
+    }
+
+    protected void showErrorAlert(String errorMsg) {
+        //Shows error dialog.
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+                errorMsg,
+                ButtonType.OK);
+        alert.showAndWait();
+
     }
 }
