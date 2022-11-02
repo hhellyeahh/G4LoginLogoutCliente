@@ -191,6 +191,9 @@ public class LogInController implements Initializable {
         controller.initData(loginUser);
 
         controller.initialize(root);
+        
+        tfUsername.setText("");
+        pfPassword.setText("");
     
     }
     protected void showErrorAlert(String errorMsg) {

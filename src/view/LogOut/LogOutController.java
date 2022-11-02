@@ -59,7 +59,7 @@ public class LogOutController {
 
     //TODO botón cerrar alert
     @FXML
-    private void handleLogOutButtonAction(ActionEvent event) throws IOException {
+    public void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
         ButtonType chooseLogOut = new ButtonType("Log out", ButtonBar.ButtonData.OK_DONE);
         ButtonType chooseExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -72,15 +72,6 @@ public class LogOutController {
         if (option.get() == chooseLogOut) {
             Stage stage = (Stage) this.btnLogOut.getScene().getWindow();
             stage.close();
-
-            Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
-
-            Scene scene2 = new Scene(root);
-
-            Stage stage2 = new Stage();
-            stage2.setResizable(false);
-            stage2.setScene(scene2);
-            stage2.show();
 
         } else if (option.get() == chooseExit) {
             Platform.exit();
