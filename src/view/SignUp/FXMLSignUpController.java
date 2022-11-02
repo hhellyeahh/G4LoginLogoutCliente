@@ -277,7 +277,7 @@ public class FXMLSignUpController implements Initializable {
             }
             //Password field and repeat password password field will allow special characters.
             if (!this.pfPassword.getText().matches(PASSWORD_REGEX)) {
-                throw new Exception("Password do not match the regex");
+                throw new Exception("The password ");
             }
 
             //The information of all text fields will be collected, validated, and stored in an object of type User.
