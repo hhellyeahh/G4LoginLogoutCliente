@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.LogIn;
 
 /**
  *
  * @author 2dam
  */
-public class IllegalUsernameException extends Exception {
+public class WindowInitializeException extends Exception {
 
-    public IllegalUsernameException(String username_cant_contain_blank_spaces) {
+    public WindowInitializeException() {
+    }
+
+    public WindowInitializeException(String message) {
+        super(message);
     }
     
 }
