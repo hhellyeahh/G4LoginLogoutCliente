@@ -9,6 +9,7 @@ package view.LogIn;
  *
  * @author Leire, Zulu
  */
+import view.LogOut.LogOutController;
 import classes.*;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -87,10 +89,11 @@ public class LogInController implements Initializable {
             }
         });
 
+        tfUsername.requestFocus();
+        
         //Disable login button.
         this.btnLogIn.setDisable(true);
         LOGGER.info("window initialized");
-
     }
 
     /**
@@ -115,7 +118,7 @@ public class LogInController implements Initializable {
         } else {
             this.btnLogIn.setDisable(false);
         }
-
+        
     }
 
     /**
@@ -137,7 +140,6 @@ public class LogInController implements Initializable {
                     ex.getMessage());
 
         }
-
     }
 
     /**
@@ -173,21 +175,22 @@ public class LogInController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
          */
-        loginUser = clientLoginLogout.login(loginUser);
-
-        Parent root = FXMLLoader.load(getClass().getResource("LogOut.fxml"));
-
-        Scene scene = new Scene(root);
-
+         
+        //  loginUser = clientLoginLogout.login(loginUser);
         Stage stage = new Stage();
-        
-        stage.setUserData(loginUser);
-        stage.setResizable(false);
-        stage.setTitle("LogOut");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
-        stage.setScene(scene);
-        stage.show();
-    }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogOut.fxml"));
+
+        Parent root = (Parent) loader.load();
+
+        LogOutController controller = (LogOutController) loader.getController();
+
+        controller.setStage(stage);
+
+        controller.initData(loginUser);
+
+        controller.initialize(root);
+    
 
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
@@ -195,6 +198,5 @@ public class LogInController implements Initializable {
                 errorMsg,
                 ButtonType.OK);
         alert.showAndWait();
-
     }
 }

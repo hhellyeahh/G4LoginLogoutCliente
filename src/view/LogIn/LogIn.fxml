@@ -25,7 +25,7 @@
                   <Image url="@../resources/login/logInIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="184.0" layoutY="72.0" text="Login">
+            <Label fx:id="lblLogin" layoutX="184.0" layoutY="72.0" text="Login">
                <font>
                   <Font size="16.0" />
                </font>
