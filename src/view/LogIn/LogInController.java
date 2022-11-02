@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -192,6 +191,9 @@ public class LogInController implements Initializable {
         controller.initData(loginUser);
 
         controller.initialize(root);
+        
+        tfUsername.setText("");
+        pfPassword.setText("");
     
     }
     protected void showErrorAlert(String errorMsg) {
@@ -202,4 +204,3 @@ public class LogInController implements Initializable {
         alert.showAndWait();
     }
 }
-
