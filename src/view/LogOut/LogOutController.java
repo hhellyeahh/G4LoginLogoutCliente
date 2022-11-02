@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.LogOut;
 
 import classes.User;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.LogIn.IncorrectUserException;
 
 /**
  *
