@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  *
  * @author unaib
  */
-public class FXMLSignUpController implements Initializable {
+public class SignUpController implements Initializable {
 
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9]*$";
     private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
@@ -242,7 +242,7 @@ public class FXMLSignUpController implements Initializable {
             Stage stage = (Stage) this.hlLogin.getScene().getWindow();
             stage.close();
         } catch (IOException ex) {
-            Logger.getLogger(FXMLSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
             Alert windowNotFoundAlert = new Alert(Alert.AlertType.ERROR);
             windowNotFoundAlert.setHeaderText(null);
             windowNotFoundAlert.setTitle("Error");
