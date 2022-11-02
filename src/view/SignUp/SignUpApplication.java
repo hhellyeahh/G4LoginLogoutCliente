@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.LogIn;
+package view.SignUp;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
  *
- * @author Leire, Zulu
+ * @author unaib
  */
-public class LogInApplication extends Application {
-    
+public class SignUpApplication extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        //Carga el documento FXML y obtiene un objeto Parent
+        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        //Crea una escena a partir del Parent
         Scene scene = new Scene(root);
-        
+        //Establece la escena en el escenario (Stage) y la muestra
         stage.setResizable(false);
-        stage.setTitle("LogIn");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
-        
+        stage.setTitle("SignUp");
+        stage.getIcons().add(new Image("resources/img/icon.png"));
         stage.setScene(scene);
         stage.show();
     }
@@ -38,5 +39,5 @@ public class LogInApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
