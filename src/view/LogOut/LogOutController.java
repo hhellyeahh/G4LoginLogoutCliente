@@ -72,16 +72,6 @@ public class LogOutController {
         if (option.get() == chooseLogOut) {
             Stage stage = (Stage) this.btnLogOut.getScene().getWindow();
             stage.close();
-
-            Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
-
-            Scene scene2 = new Scene(root);
-
-            Stage stage2 = new Stage();
-            stage2.setResizable(false);
-            stage2.setScene(scene2);
-            stage2.show();
-
         } else if (option.get() == chooseExit) {
             Platform.exit();
         }
@@ -90,15 +80,15 @@ public class LogOutController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
-    public void initData(User user){
-        try{
-            if(user == null){
+
+    public void initData(User user) {
+        try {
+            if (user == null) {
                 throw new IncorrectUserException();
             }
             this.user = user;
-        }catch(IncorrectUserException iue){
-            
+        } catch (IncorrectUserException iue) {
+
         }
     }
 }

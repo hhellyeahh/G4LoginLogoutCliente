@@ -6,16 +6,12 @@
 package view.SignUp;
 
 import classes.*;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,13 +25,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
  *
  * @author unaib
  */
-public class FXMLSignUpController implements Initializable {
+public class SignUpController {
+
+    private Stage stage;
 
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9]*$";
     private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
@@ -67,9 +66,22 @@ public class FXMLSignUpController implements Initializable {
     @FXML
     private Label lblRepeatPassword;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //Tooltips
+    public void initialize(Parent root) {
+        Scene scene = new Scene(root);
+        //Not a resizable window.
+        stage.setResizable(false);
+        //Modal window of LogIn.
+        stage.initModality(Modality.WINDOW_MODAL);
+        //The window title will be ”SignUp”
+        stage.setTitle("SignUp");
+        //Add a leaf icon.
+        stage.getIcons().add(new Image("resources/img/icon.png"));
+        //Add scene
+        stage.setScene(scene);
+        //Show window
+        stage.show();
+
+        //For each field add tooltips with the same name as the prompt text.
         tfUsername.setTooltip(new Tooltip("Username"));
         tfFullName.setTooltip(new Tooltip("Name and Surname"));
         tfEmail.setTooltip(new Tooltip("Email"));
@@ -83,7 +95,7 @@ public class FXMLSignUpController implements Initializable {
         this.tfEmail.textProperty().addListener(this::handleFieldsTextChange);
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
         this.pfRepeatPassword.textProperty().addListener(this::handleFieldsTextChange);
-        this.hlLogin.setOnAction(this::handleButtonContinueAction);
+        this.hlLogin.setOnAction(this::handleHyperlinkLogInAction);
         this.btnContinue.setOnAction(this::handleButtonContinueAction);
 
         /**
@@ -120,6 +132,10 @@ public class FXMLSignUpController implements Initializable {
 
         //Set hand cursor on Continue button
         btnContinue.setCursor(Cursor.HAND);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     private void handleFieldsTextChange(ObservableValue observable,
@@ -223,26 +239,10 @@ public class FXMLSignUpController implements Initializable {
          * Close the SignUp and open the login window.
          */
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogIn/LogIn.fxml"));
-            //Carga el documento FXML y obtiene un objeto Parent
-            Parent root = (Parent) loader.load();
-            //Crea una escena a partir del Parent
-            Scene scene = new Scene(root);
-            Stage stageLogin = new Stage();
-
-            //FXMLSignInController controller = loader.getController();
-            //controller.setStage(stageLogin);
-            //Establece la escena en el escenario (Stage) y la muestra
-            stageLogin.setResizable(false);
-            stageLogin.setTitle("Login");
-            stageLogin.getIcons().add(new Image("resources/img/icon.png"));
-            stageLogin.setScene(scene);
-            stageLogin.show();
-
             Stage stage = (Stage) this.hlLogin.getScene().getWindow();
             stage.close();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
             Alert windowNotFoundAlert = new Alert(Alert.AlertType.ERROR);
             windowNotFoundAlert.setHeaderText(null);
             windowNotFoundAlert.setTitle("Error");
@@ -277,7 +277,7 @@ public class FXMLSignUpController implements Initializable {
             }
             //Password field and repeat password password field will allow special characters.
             if (!this.pfPassword.getText().matches(PASSWORD_REGEX)) {
-                throw new Exception("The password ");
+                throw new Exception("The password can only use this special characters [@$!%*#?&]");
             }
 
             //The information of all text fields will be collected, validated, and stored in an object of type User.
@@ -289,25 +289,22 @@ public class FXMLSignUpController implements Initializable {
             newUser.setPrivilege(UserPrivilege.USER);
             newUser.setStatus(UserStatus.ENABLE);
 
-            //A user will be generated and call the signUp method in the LoginLogout interface.
-            
+            //Carga el documento FXML y obtiene un objeto Parent
+            Parent root = FXMLLoader.load(getClass().getResource("../view/LogIn.fxml"));
+            //Crea una escena a partir del Parent
+            Scene scene = new Scene(root);
+            //Establece la escena en el escenario (Stage) y la muestra
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setTitle("LogIn");
+            stage.getIcons().add(new Image("resources/img/icon.png"));
+            stage.setScene(scene);
+            stage.show();
+
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
         } catch (Exception e) {
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
-        /*
-        //Carga el documento FXML y obtiene un objeto Parent
-        Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
-        //Crea una escena a partir del Parent
-        Scene scene = new Scene(root);
-        //Establece la escena en el escenario (Stage) y la muestra
-        Stage stage = new Stage();
-        stage.setResizable(false);
-        stage.setTitle("SignUp");
-        stage.getIcons().add(new Image("resources/img/icon.png"));
-        stage.setScene(scene);
-        stage.show();
-         */
     }
 }
