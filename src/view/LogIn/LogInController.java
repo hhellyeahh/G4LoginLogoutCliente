@@ -191,7 +191,7 @@ public class LogInController implements Initializable {
 
         controller.initialize(root);
     
-
+    }
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
         Alert alert = new Alert(Alert.AlertType.ERROR,
