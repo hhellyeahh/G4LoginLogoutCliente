@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.LogIn.LogInController;
 
 /**
  *
@@ -21,13 +22,14 @@ public class LogInApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        //Carga el documento FXML y obtiene un objeto Parent
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        //Crea una escena a partir del Parent
         Scene scene = new Scene(root);
-        
+        //Establece la escena en el escenario (Stage) y la muestra
         stage.setResizable(false);
-        stage.setTitle("LogIn");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
-        
+        stage.setTitle("SignIn");
+        stage.getIcons().add(new Image("resources/img/icon.png"));
         stage.setScene(scene);
         stage.show();
     }
