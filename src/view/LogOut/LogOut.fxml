@@ -6,11 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" style="-fx-background-color: #E4F3F1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogOutController">
+<Pane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" style="-fx-background-color: #E4F3F1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogOut.LogOutController">
    <children>
       <Pane layoutX="200.0" layoutY="150.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #c5e5e5;">
          <children>
-            <TextField fx:id="tfMessage" alignment="CENTER" focusTraversable="false" layoutX="70.0" layoutY="121.0" prefHeight="29.0" prefWidth="268.0" text="Welcome to G4 Team Members!" />
+            <TextField fx:id="tfMessage" alignment="CENTER" layoutX="70.0" layoutY="121.0" prefHeight="29.0" prefWidth="268.0" text="Welcome to G4 Team Members!" />
             <Button fx:id="btnLogOut" layoutX="172.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" style="-fx-background-color: #94BCB6;" text="Log Out" />
          </children>
       </Pane>

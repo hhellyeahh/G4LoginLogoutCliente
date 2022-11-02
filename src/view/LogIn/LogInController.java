@@ -150,7 +150,8 @@ public class LogInController implements Initializable {
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
 
-        try {
+      /*
+    try {
             String usernameString = tfUsername.toString().toLowerCase();
             if (usernameString.contains(" ")) {
                 IllegalUsernameException ex = new IllegalUsernameException("Username cant contain blank spaces");
@@ -161,7 +162,7 @@ public class LogInController implements Initializable {
              showErrorAlert("Username can´t contain blank spaces");
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
-
+*/
         LOGGER.info("inicio de envio información al servidor");
         User loginUser = new User();
         loginUser.setLogin(tfUsername.getText());
@@ -179,7 +180,7 @@ public class LogInController implements Initializable {
         //  loginUser = clientLoginLogout.login(loginUser);
         Stage stage = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogOut.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
 
         Parent root = (Parent) loader.load();
 

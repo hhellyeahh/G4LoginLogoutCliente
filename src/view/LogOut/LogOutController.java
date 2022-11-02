@@ -57,7 +57,7 @@ public class LogOutController {
         stage.show();
     }
 
-    //TODO boton cerrar alert
+    //TODO botón cerrar alert
     @FXML
     private void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
