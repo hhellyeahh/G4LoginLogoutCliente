@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" style="-fx-background-color: #E4F3F1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogOut.LogOutController">
+<Pane fx:id="pnLogOut" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" style="-fx-background-color: #E4F3F1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogOut.LogOutController">
    <children>
       <Pane layoutX="200.0" layoutY="150.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #c5e5e5;">
          <children>
