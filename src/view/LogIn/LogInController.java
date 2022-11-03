@@ -169,15 +169,17 @@ public class LogInController implements Initializable {
         loginUser.setPassword(pfPassword.getText().toString());
 
         LoginLogout clientLoginLogout = null;
-        /* 
+         
         try {
             clientLoginLogout = Factory.getLoginLogout();
-        } catch (UnknownModelTypeException ex) {
+            
+               loginUser = clientLoginLogout.logIn(loginUser);
+            
+        } catch (Exception ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         */
-         
-        //  loginUser = clientLoginLogout.login(loginUser);
+        
+   // HACER UN IF DE SI EL USER RETURNEADO ES NULL SE SACA ALERTA SI NO ES NULL SE PROCEDE CON EL LA CREAUIB DE KA VEBTABA
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
