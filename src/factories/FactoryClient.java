@@ -5,11 +5,9 @@
  */
 package factories;
 
-
 import classes.LoginLogout;
 import exceptions.UnknownModelTypeException;
 import interfaces.ClientImplementation;
-import java.util.ResourceBundle;
 
 /**
  *
@@ -27,13 +25,8 @@ public class FactoryClient {
      */
     public static LoginLogout getLoginLogout() throws UnknownModelTypeException {
 
-        switch (ResourceBundle.getBundle("config").getString("LOGINLOGOUT")) {
-            case "CLIENT":
-                data = new ClientImplementation();
-                break;
-            default:
-                throw new UnknownModelTypeException("That type of model is not valid.");
-        }
+        data = new ClientImplementation();
+
         return data;
     }
 }
