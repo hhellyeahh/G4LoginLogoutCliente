@@ -143,7 +143,7 @@ public class SignUpController {
         this.stage = stage;
     }
 
-    private void handleFieldsTextChange(ObservableValue observable,
+    public void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
         /**
@@ -299,14 +299,15 @@ public class SignUpController {
             //Crea una escena a partir del Parent
             Scene scene = new Scene(root);
             //Establece la escena en el escenario (Stage) y la muestra
-            Stage stage = new Stage();
-            stage.setResizable(false);
-            stage.setTitle("LogIn");
-            stage.getIcons().add(new Image("resources/img/icon.png"));
-            stage.setScene(scene);
-            stage.show();
+            Stage newStage = new Stage();
+            newStage.setResizable(false);
+            newStage.setTitle("LogIn");
+            newStage.getIcons().add(new Image("resources/img/icon.png"));
+            newStage.setScene(scene);
+            newStage.show();
 
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
+            new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
         } catch (Exception e) {
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
