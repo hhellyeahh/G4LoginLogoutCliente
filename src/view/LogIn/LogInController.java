@@ -11,9 +11,8 @@ package view.LogIn;
  */
 import view.LogOut.LogOutController;
 import classes.*;
+import factories.FactoryClient;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
@@ -33,15 +32,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.SignUp.SignUpController;
 
 /**
  *
  * @author Leire, Zulu
  */
-public class LogInController implements Initializable {
+public class LogInController{
 
+    private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
 
     @FXML
@@ -56,14 +57,14 @@ public class LogInController implements Initializable {
     private Hyperlink hlSignUp;
     @FXML
     private Button btnLogIn;
+    @FXML
+    private Pane pnLogIn;
 
     /**
-     *
-     * @param url
-     * @param rb
+     * 
+     * @param root 
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(Parent root) {
         LOGGER.info("initializing the window");
 
         //Tooltips
@@ -90,7 +91,7 @@ public class LogInController implements Initializable {
         });
 
         tfUsername.requestFocus();
-        
+
         //Disable login button.
         this.btnLogIn.setDisable(true);
         LOGGER.info("window initialized");
@@ -118,7 +119,7 @@ public class LogInController implements Initializable {
         } else {
             this.btnLogIn.setDisable(false);
         }
-        
+
     }
 
     /**
@@ -130,11 +131,18 @@ public class LogInController implements Initializable {
     private void handleSignUpHyperlinkAction(ActionEvent event) {
         LOGGER.info("Probando a abrir ventana de registro");
         try {
-            Stage stage = (Stage) this.hlSignUp.getScene().getWindow();
-            stage.close();
+            //  loginUser = clientLoginLogout.login(loginUser);
+            Stage stage = new Stage();
+            FXMLLoader loader;
+            loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
+            Parent root = (Parent) loader.load();
+            SignUpController controller = (SignUpController) loader.getController();
+            controller.setStage(stage);
+            controller.initialize(root);
+
             LOGGER.info("ventana de registro abierta");
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             showErrorAlert("No se ha podido abrir la ventana");
             LOGGER.log(Level.SEVERE,
                     ex.getMessage());
@@ -150,36 +158,39 @@ public class LogInController implements Initializable {
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
 
-        try {
+        /*
+    try {
             String usernameString = tfUsername.toString().toLowerCase();
             if (usernameString.contains(" ")) {
-                IllegalUsernameException ex = new IllegalUsernameException("Username cant contain blank spaces");
+                IllegalUsernameException ex = new IllegalUsernameException("Username can not contain blank spaces");
                 throw ex;
             }
 
         } catch (Exception e) {
-             showErrorAlert("Username can´t contain blank spaces");
+            showErrorAlert("Username can´t contain blank spaces");
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
-
+         */
         LOGGER.info("inicio de envio información al servidor");
         User loginUser = new User();
         loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText().toString());
+        loginUser.setPassword(pfPassword.getText());
 
         LoginLogout clientLoginLogout = null;
-        /* 
+
         try {
-            clientLoginLogout = Factory.getLoginLogout();
-        } catch (UnknownModelTypeException ex) {
+            clientLoginLogout = FactoryClient.getLoginLogout();
+
+            loginUser = clientLoginLogout.logIn(loginUser);
+
+        } catch (Exception ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         */
-         
-        //  loginUser = clientLoginLogout.login(loginUser);
+
+        // HACER UN IF DE SI EL USER RETURNEADO ES NULL SE SACA ALERTA SI NO ES NULL SE PROCEDE CON EL LA CREAUIB DE KA VEBTABA
         Stage stage = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogOut.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
 
         Parent root = (Parent) loader.load();
 
@@ -190,8 +201,12 @@ public class LogInController implements Initializable {
         controller.initData(loginUser);
 
         controller.initialize(root);
-    
+
+        tfUsername.setText("");
+        pfPassword.setText("");
+
     }
+
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
         Alert alert = new Alert(Alert.AlertType.ERROR,
@@ -199,4 +214,10 @@ public class LogInController implements Initializable {
                 ButtonType.OK);
         alert.showAndWait();
     }
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 }
+
