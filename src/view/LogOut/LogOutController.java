@@ -74,7 +74,6 @@ public class LogOutController {
         if (option.get() == chooseLogOut) {
             Stage stage = (Stage) this.btnLogOut.getScene().getWindow();
             stage.close();
-
         } else if (option.get() == chooseExit) {
             Platform.exit();
         }
@@ -83,15 +82,15 @@ public class LogOutController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
-    public void initData(User user){
-        try{
-            if(user == null){
+
+    public void initData(User user) {
+        try {
+            if (user == null) {
                 throw new IncorrectUserException();
             }
             this.user = user;
-        }catch(IncorrectUserException iue){
-            
+        } catch (IncorrectUserException iue) {
+
         }
     }
 }

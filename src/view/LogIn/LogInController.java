@@ -32,6 +32,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import view.SignUp.SignUpController;
 
 /**
  *
@@ -54,6 +55,8 @@ public class LogInController{
     private Hyperlink hlSignUp;
     @FXML
     private Button btnLogIn;
+    @FXML
+    private Pane pnLogIn;
 
     /**
      * 
@@ -86,7 +89,7 @@ public class LogInController{
         });
 
         tfUsername.requestFocus();
-        
+
         //Disable login button.
         this.btnLogIn.setDisable(true);
         LOGGER.info("window initialized");
@@ -114,7 +117,7 @@ public class LogInController{
         } else {
             this.btnLogIn.setDisable(false);
         }
-        
+
     }
 
     /**
@@ -126,11 +129,18 @@ public class LogInController{
     private void handleSignUpHyperlinkAction(ActionEvent event) {
         LOGGER.info("Probando a abrir ventana de registro");
         try {
-            Stage stage = (Stage) this.hlSignUp.getScene().getWindow();
-            stage.close();
+            //  loginUser = clientLoginLogout.login(loginUser);
+            Stage stage = new Stage();
+            FXMLLoader loader;
+            loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
+            Parent root = (Parent) loader.load();
+            SignUpController controller = (SignUpController) loader.getController();
+            controller.setStage(stage);
+            controller.initialize(root);
+
             LOGGER.info("ventana de registro abierta");
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             showErrorAlert("No se ha podido abrir la ventana");
             LOGGER.log(Level.SEVERE,
                     ex.getMessage());
@@ -150,21 +160,21 @@ public class LogInController{
     try {
             String usernameString = tfUsername.toString().toLowerCase();
             if (usernameString.contains(" ")) {
-                IllegalUsernameException ex = new IllegalUsernameException("Username cant contain blank spaces");
+                IllegalUsernameException ex = new IllegalUsernameException("Username can not contain blank spaces");
                 throw ex;
             }
 
         } catch (Exception e) {
-             showErrorAlert("Username can´t contain blank spaces");
+            showErrorAlert("Username can´t contain blank spaces");
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
-*/
+         */
         LOGGER.info("inicio de envio información al servidor");
         User loginUser = new User();
         loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText().toString());
+        loginUser.setPassword(pfPassword.getText());
 
-        LoginLogout clientLoginLogout = null;
+        LoginLogout clientLoginLogout;
         /* 
         try {
             clientLoginLogout = Factory.getLoginLogout();
@@ -172,7 +182,8 @@ public class LogInController{
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
          */
-         
+        clientLoginLogout = null;
+
         //  loginUser = clientLoginLogout.login(loginUser);
         Stage stage = new Stage();
 
@@ -187,11 +198,12 @@ public class LogInController{
         controller.initData(loginUser);
 
         controller.initialize(root);
-        
+
         tfUsername.setText("");
         pfPassword.setText("");
-    
+
     }
+
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
         Alert alert = new Alert(Alert.AlertType.ERROR,
