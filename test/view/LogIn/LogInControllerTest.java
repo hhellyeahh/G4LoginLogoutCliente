@@ -24,17 +24,28 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 /**
- *
+ * Testing class for Login view and controller
+ * Tests login view behavior using TestFX framework
  * @author Leire
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LogInControllerTest extends ApplicationTest {
 
+    /**
+     * Starts application to be tested
+     * @param stage Primary Stage object
+     * @throws Exception  if there is any error
+     */
     @Override
     public void start(Stage stage) throws Exception {
         new LogInApplication().start(stage);
     }
 
+    /**
+     * Set up Java FX fixture for tests. This is a general approach for using a 
+     * unique instance of the application in the test.
+     * @throws java.util.concurrent.TimeoutException
+     */
     @BeforeClass
     public static void ClickApplicationTest() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
@@ -44,12 +55,10 @@ public class LogInControllerTest extends ApplicationTest {
     /**
      * Test of initial state of LogIn view.
      */
-    @Test
+    @Test //TODO
     public void test1_LogInInitialState() {
-        clickOn("#tfUsername");
         verifyThat("#tfUsername", hasText(""));
         verifyThat("#lblUsername", hasText(""));
-        clickOn("#pfPassword");
         verifyThat("#pfPassword", hasText(""));
         verifyThat("#lblPassword", hasText(""));
         verifyThat("#btnLogIn", isDisabled());
@@ -69,7 +78,8 @@ public class LogInControllerTest extends ApplicationTest {
     }
 
     /**
-     * Test that button Log In is disabled when user and password fields are not full.
+     * Test that button Log In is disabled when user and password fields are not
+     * full.
      */
     @Test
     public void test3_LogInButtonIsDisabled() {
@@ -120,8 +130,7 @@ public class LogInControllerTest extends ApplicationTest {
     /**
      * Test LogOut view is opened when button Log In is clicked
      */
-    @Test
-    @Ignore
+    @Test //TODO 
     public void test6_SignUpOpenedSignUpClick() {
         clickOn("#hlSignUp");
         verifyThat("#pnSignUp", isVisible());
