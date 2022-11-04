@@ -33,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.SignUp.SignUpController;
@@ -57,6 +58,8 @@ public class LogInController implements Initializable {
     private Hyperlink hlSignUp;
     @FXML
     private Button btnLogIn;
+    @FXML
+    private Pane pnLogIn;
 
     /**
      *
@@ -133,7 +136,8 @@ public class LogInController implements Initializable {
         try {
             //  loginUser = clientLoginLogout.login(loginUser);
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
+            FXMLLoader loader;
+            loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
             Parent root = (Parent) loader.load();
             SignUpController controller = (SignUpController) loader.getController();
             controller.setStage(stage);
@@ -141,7 +145,7 @@ public class LogInController implements Initializable {
 
             LOGGER.info("ventana de registro abierta");
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             showErrorAlert("No se ha podido abrir la ventana");
             LOGGER.log(Level.SEVERE,
                     ex.getMessage());
@@ -169,13 +173,13 @@ public class LogInController implements Initializable {
             showErrorAlert("Username can´t contain blank spaces");
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
-*/
+         */
         LOGGER.info("inicio de envio información al servidor");
         User loginUser = new User();
         loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText().toString());
+        loginUser.setPassword(pfPassword.getText());
 
-        LoginLogout clientLoginLogout = null;
+        LoginLogout clientLoginLogout;
         /* 
         try {
             clientLoginLogout = Factory.getLoginLogout();
@@ -183,6 +187,7 @@ public class LogInController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
          */
+        clientLoginLogout = null;
 
         //  loginUser = clientLoginLogout.login(loginUser);
         Stage stage = new Stage();
@@ -198,7 +203,7 @@ public class LogInController implements Initializable {
         controller.initData(loginUser);
 
         controller.initialize(root);
-        
+
         tfUsername.setText("");
         pfPassword.setText("");
 

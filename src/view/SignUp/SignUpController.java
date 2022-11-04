@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -65,6 +66,10 @@ public class SignUpController {
     private Label lblPassword;
     @FXML
     private Label lblRepeatPassword;
+    @FXML
+    private Pane pnSignUp;
+    @FXML
+    private Label labelSignUp;
 
     public void initialize(Parent root) {
         Scene scene = new Scene(root);
@@ -171,9 +176,9 @@ public class SignUpController {
 
         /**
          * If the password on both fields is not the same, the background of
-         * both will change to red colour and a red text will appear below the
+         * both will change to red color and a red text will appear below the
          * text field with a “Passwords are not the same.”, when it's the same,
-         * the background will recover the normal colour and the label will
+         * the background will recover the normal color and the label will
          * disappear. Continue button will only be enabled when both fields have
          * the same password.
          */
@@ -229,7 +234,7 @@ public class SignUpController {
     }
 
     /**
-     * Handle Action event on Aceptar button
+     * Handle Action event on Hyperlink Login button
      *
      * @param event The action event object
      */
