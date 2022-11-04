@@ -5,81 +5,148 @@
  */
 package view.LogOut;
 
-import classes.User;
-import javafx.event.ActionEvent;
-import javafx.scene.Parent;
+import application.Application;
+import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.runners.MethodSorters;
 import static org.testfx.api.FxAssert.verifyThat;
-import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 /**
- *
+ * Testing class for Logout view and controller
+ * Tests logout view behavior using TestFX framework
  * @author Leire
  */
-public class LogOutControllerTest {
-    private User user;
-    
-    public LogOutControllerTest() {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class LogOutControllerTest extends ApplicationTest {
+
+    /**
+     * Starts application to be tested
+     * @param stage Primary Stage object
+     * @throws Exception  if there is any error
+     */
+    @Override
+    public void start(Stage stage) throws Exception {
+        new Application().start(stage);
     }
 
     /**
-     * Test of initialize method, of class LogOutController.
+     * Set up Java FX fixture for tests. This is a general approach for using a 
+     * unique instance of the application in the test.
+     * @throws java.util.concurrent.TimeoutException
+     */
+    @BeforeClass
+    public static void ClickApplicationTest() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(Application.class);
+    }
+
+    /**
+     * Test LogOut view is opened when button Log In is clicked
+     * Test of initial state of LogOut view.
+     * Test of the alert Log Out Button
      */
     @Test
-    public void testInitialize() {
-        System.out.println("initialize");
-        Parent root = null;
-        LogOutController instance = new LogOutController();
-        instance.initialize(root);
+    public void test1_LogOutOpenedLogInClick() {
+        clickOn("#tfUsername");
+        write("LeireCarrasco");
+        clickOn("#pfPassword");
+        write("abcd*1234");
+        clickOn("#btnLogIn");
+        verifyThat("#pnLogOut", isVisible());
         
-        verifyThat("#tfMessage", hasText("Welcome back: " + user.getLogin() + "."));
+        verifyThat("Welcome back: LeireCarrasco.", isVisible());
         verifyThat("#btnLogOut", isEnabled());
         
-        fail("The test case is a prototype.");
+        clickOn("#btnLogOut");
+        verifyThat("Do you want to log out or exit the application?", isVisible());
+        clickOn("Log out");
     }
     
-    public void testHandleLogOutButtonAction() {
-        System.out.println("handleLogOutButtonAction");
-        ActionEvent event = null;
-        LogOutController instance = new LogOutController();
-       // instance.handleLogOutButtonAction(event);
+    /**
+     * Test LogOut view is opened when button Log In is clicked
+     * Test of initial state of LogOut view.
+     * Test of the alert exit Button
+     */
+    @Test
+    public void test2_LogOutOpenedLogInClick() {
+        clickOn("#tfUsername");
+        write("LeireCarrasco");
+        clickOn("#pfPassword");
+        write("abcd*1234");
+        clickOn("#btnLogIn");
+        verifyThat("#pnLogOut", isVisible());
         
-        verifyThat("OK_DONE", NodeMatchers.isVisible());
-        verifyThat("CANCEL_CLOSE", NodeMatchers.isVisible());
+        verifyThat("Welcome back: LeireCarrasco.", isVisible());
+        verifyThat("#btnLogOut", isEnabled());
         
-        
-        fail("The test case is a prototype.");
+        clickOn("#btnLogOut");
+        verifyThat("Do you want to log out or exit the application?", isVisible());
+        clickOn("Exit");
     }
     
+    /**
+     * Test of initial state of LogOut view.
+     */
+    @Test
+    @Ignore
+    public void test2_LogOutInitialState() {
+        //verifyThat("#tfMessage", hasText("Welcome back: LeireCarrasco."));
+        verifyThat("Welcome back: LeireCarrasco.", isVisible());
+        verifyThat("#btnLogOut", isEnabled());
+    }
+
+    /**
+     * Test of the alert Log Out Button
+     */
+    @Test
+    @Ignore
+    public void test3_HandleLogOutButtonAction(){
+        clickOn("#btnLogOut");
+        verifyThat("Do you want to log out or exit the application?", isVisible());
+        clickOn("Log out");
+    }
+    
+    /**
+     * Test of the alert exit Button
+     */
+    @Test
+    @Ignore
+    public void test4_HandleExitButtonAction(){
+        clickOn("#btnLogOut");
+        verifyThat("Do you want to log out or exit the application?", isVisible());
+        clickOn("Exit");
+    }
 
     /**
      * Test of setStage method, of class LogOutController.
-     */
+     *//*
     @Test
     public void testSetStage() {
-        System.out.println("setStage");
         Stage stage = null;
         LogOutController instance = new LogOutController();
         instance.setStage(stage);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+*/
     /**
      * Test of initData method, of class LogOutController.
-     */
+     *//*
     @Test
     public void testInitData() {
-        System.out.println("initData");
         User user = null;
         LogOutController instance = new LogOutController();
         instance.initData(user);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+*/
 }

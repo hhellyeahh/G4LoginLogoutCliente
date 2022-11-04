@@ -11,7 +11,6 @@ import java.util.Optional;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.LogIn.IncorrectUserException;
@@ -39,6 +39,8 @@ public class LogOutController {
     private TextField tfMessage;
     @FXML
     private Button btnLogOut;
+    @FXML
+    private Pane pnLogOut;
 
     public void initialize(Parent root) {
         //Tooltips
@@ -59,7 +61,7 @@ public class LogOutController {
 
     //TODO botón cerrar alert
     @FXML
-    private void handleLogOutButtonAction(ActionEvent event) throws IOException {
+    public void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
         ButtonType chooseLogOut = new ButtonType("Log out", ButtonBar.ButtonData.OK_DONE);
         ButtonType chooseExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -80,15 +82,15 @@ public class LogOutController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
-    public void initData(User user){
-        try{
-            if(user == null){
+
+    public void initData(User user) {
+        try {
+            if (user == null) {
                 throw new IncorrectUserException();
             }
             this.user = user;
-        }catch(IncorrectUserException iue){
-            
+        } catch (IncorrectUserException iue) {
+
         }
     }
 }
