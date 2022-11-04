@@ -56,7 +56,7 @@ public class LogInControllerTest extends ApplicationTest {
      * Test of initial state of LogIn view.
      */
     @Test //TODO
-    public void test1_LogInInitialState() {
+    public void test1_LogInViewInitialState() {
         verifyThat("#tfUsername", hasText(""));
         verifyThat("#lblUsername", hasText(""));
         verifyThat("#pfPassword", hasText(""));
@@ -68,6 +68,7 @@ public class LogInControllerTest extends ApplicationTest {
      * Test that button Log In is enabled.
      */
     @Test
+    @Ignore
     public void test2_LogInButtonIsEnabled() {
         clickOn("#tfUsername");
         write("LeireCarrasco");
@@ -82,6 +83,7 @@ public class LogInControllerTest extends ApplicationTest {
      * full.
      */
     @Test
+    @Ignore
     public void test3_LogInButtonIsDisabled() {
         clickOn("#tfUsername");
         write("LeireCarrasco");
@@ -98,6 +100,7 @@ public class LogInControllerTest extends ApplicationTest {
      * Test that labels works.
      */
     @Test
+    @Ignore
     public void test4_LabelControl() {
         clickOn("#tfUsername");
         write("Leire ");
@@ -118,6 +121,7 @@ public class LogInControllerTest extends ApplicationTest {
      * Test LogOut view is opened when button Log In is clicked
      */
     @Test
+    @Ignore
     public void test5_LogOutOpenedLogInClick() {
         clickOn("#tfUsername");
         write("LeireCarrasco");
@@ -131,6 +135,7 @@ public class LogInControllerTest extends ApplicationTest {
      * Test LogOut view is opened when button Log In is clicked
      */
     @Test //TODO 
+    @Ignore
     public void test6_SignUpOpenedSignUpClick() {
         clickOn("#hlSignUp");
         verifyThat("#pnSignUp", isVisible());
