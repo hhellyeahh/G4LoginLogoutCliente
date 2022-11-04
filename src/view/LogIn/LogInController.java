@@ -12,8 +12,6 @@ package view.LogIn;
 import view.LogOut.LogOutController;
 import classes.*;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
@@ -39,8 +37,9 @@ import javafx.stage.Stage;
  *
  * @author Leire, Zulu
  */
-public class LogInController implements Initializable {
+public class LogInController{
 
+    private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
 
     @FXML
@@ -57,12 +56,10 @@ public class LogInController implements Initializable {
     private Button btnLogIn;
 
     /**
-     *
-     * @param url
-     * @param rb
+     * 
+     * @param root 
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(Parent root) {
         LOGGER.info("initializing the window");
 
         //Tooltips
@@ -202,4 +199,10 @@ public class LogInController implements Initializable {
                 ButtonType.OK);
         alert.showAndWait();
     }
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 }
+

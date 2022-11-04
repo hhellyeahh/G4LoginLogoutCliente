@@ -21,7 +21,7 @@ public class LogInApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../LogIn/LogIn.fxml"));
         Scene scene = new Scene(root);
         
         stage.setResizable(false);
