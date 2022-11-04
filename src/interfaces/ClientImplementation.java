@@ -8,6 +8,8 @@ package interfaces;
 
 import sockets.ClientSocket;
 import classes.*;
+import exceptions.*;
+
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.logging.Level;
@@ -19,42 +21,84 @@ import java.util.logging.Logger;
  */
 public class ClientImplementation implements LoginLogout {
 
-    public ClientImplementation() {
-    }
+    private ClientSocket clientSocket = new ClientSocket();
 
     @Override
-    public User logIn(User user) {
-        
-        Message message = new Message();
-        message.setUser(user);
-        message.setCallType(Type.LOGIN_REQUEST);
-        message.setSignIn(new SignIn(new Timestamp(System.currentTimeMillis()), user.getId()));
-        
-         ClientSocket clientSocket = new ClientSocket();
-         
+    public User logIn(User user) throws IncorrectLoginException, ServerException, UnknownTypeException {
+
+        Message message = null;
+
         try {
-            Message returnMessage = new Message();
-            returnMessage = clientSocket.sendRecieve(message);
-            User returnUser = new User();
-            returnUser = returnMessage.getUser();
-            user = returnUser;
+            //Creo un mensaje y establezco valores 
+            message = new Message();
+            message.setUser(user);
+            message.setCallType(Type.LOGIN_REQUEST);
+            message.setSignIn(new SignIn(new Timestamp(System.currentTimeMillis()), user.getId()));
+
+            Message returnMessage = clientSocket.sendRecieve(message);
+            //Analizar el mensaje de resupuesta
+            switch (returnMessage.getCallType()) {
+                case SERVER_ERROR_RESPONSE:
+
+                    throw new ServerException("Error at reaching the server");
+
+                case INCORRECT_LOGIN_RESPONSE:
+                    throw new IncorrectLoginException("User or password is incorrect or user does not exist");
+
+                case OKAY_RESPONSE:
+
+                    user = returnMessage.getUser();
+                    break;
+
+                default:
+                    throw new UnknownTypeException("Unknown type of message");
+
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(ClientImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        return user ;
+
+        return user;
     }
 
     @Override
-    public User signUp(User user) {
-        
-        Message message = new Message();
-        message.setUser(user);
-        message.setCallType(Type.SIGNUP_REQUEST);
-        
-        
+    public User signUp(User user) throws ServerException, UserAlreadyExistExpection, UnknownTypeException {
+
+        Message message = null;
+
+        try {
+            //Creo un mensaje y establezco valores 
+            message = new Message();
+            message.setUser(user);
+            message.setCallType(Type.SIGNUP_REQUEST);
+            message.setSignIn(new SignIn(new Timestamp(System.currentTimeMillis()), user.getId()));
+
+            Message returnMessage = clientSocket.sendRecieve(message);
+            //Analizar el mensaje de resupuesta
+            switch (returnMessage.getCallType()) {
+                case SERVER_ERROR_RESPONSE:
+
+                    throw new ServerException("Error at reaching the server");
+
+                case USER_ALREADY_EXIST_RESPONE:
+                    throw new UserAlreadyExistExpection("User already exists");
+
+                case OKAY_RESPONSE:
+
+                    user = returnMessage.getUser();
+                    break;
+
+                default:
+                    throw new UnknownTypeException("Unknown type of message");
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(ClientImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return user;
     }
-    
-}
 
+}

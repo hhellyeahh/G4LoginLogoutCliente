@@ -20,39 +20,29 @@ import java.net.Socket;
  */
 public class ClientSocket {
 
-    static final String HOST = "localhost";
-    static final int PUERTO = 5000;
-     Message msgEnvio = new Message();
- Message msgRecibo = new Message();
-    ClientSocket(Message message) {
-        msgEnvio = message;
-    }
-
-    public ClientSocket() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private static final String HOST = "localhost";
+    private static final int PUERTO = 5000;
+    private Message msgRecibo = new Message();
 
     public Message sendRecieve(Message mesg) throws IOException {
         try {
-
-            //ENVIO
+            System.out.println("HOla");
             Socket skCliente = new Socket(HOST, PUERTO);
+
             OutputStream palServer = skCliente.getOutputStream();
             ObjectOutputStream flujo2 = new ObjectOutputStream(palServer);
             flujo2.writeObject(mesg);
-            
+
             //RECIBO
-            
             InputStream aux = skCliente.getInputStream();
             ObjectInputStream flujo = new ObjectInputStream(aux);
             msgRecibo = (Message) flujo.readObject();
             skCliente.close();
-                    
-       
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return msgRecibo;
     }
-    
+
 }
