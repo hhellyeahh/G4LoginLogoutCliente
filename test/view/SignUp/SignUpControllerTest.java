@@ -5,10 +5,10 @@
  */
 package view.SignUp;
 
+import application.Application;
 import java.util.concurrent.TimeoutException;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -18,7 +18,6 @@ import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
-import view.LogIn.LogInApplication;
 
 /**
  *
@@ -36,7 +35,7 @@ public class SignUpControllerTest extends ApplicationTest {
     @BeforeClass
     public static void ClickApplicationTest() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(LogInApplication.class);
+        FxToolkit.setupApplication(Application.class);
     }
 
     /**
