@@ -16,17 +16,17 @@
       </Pane>
       <ImageView fitHeight="345.0" fitWidth="249.0" layoutX="-21.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/login/hojaLogout.png" />
+            <Image url="@../../resources/login/hojaLogout.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="365.0" fitWidth="421.0" layoutX="552.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/login/hojasSignup.png" />
+            <Image url="@../../resources/login/hojasSignup.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="373.0" fitWidth="354.0" layoutX="563.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/login/hojaLogin.png" />
+            <Image url="@../../resources/login/hojaLogin.png" />
          </image>
       </ImageView>
    </children>

@@ -17,7 +17,12 @@ import view.LogIn.LogInController;
  * @author Leire
  */
 public class Application extends javafx.application.Application{
-
+    
+    /**
+     * 
+     * @param stage
+     * @throws Exception 
+     */
     public void start(Stage stage) throws Exception {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LogIn/LogIn.fxml"));
@@ -34,7 +39,7 @@ public class Application extends javafx.application.Application{
 
         stage.setResizable(false);
         stage.setTitle("LogIn");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
+        stage.getIcons().add(new Image("/resources/login/icon.png"));
 
         stage.setScene(scene);
         stage.show();

@@ -5,12 +5,10 @@
  */
 package view.LogIn;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import application.Application;
 import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -38,7 +36,7 @@ public class LogInControllerTest extends ApplicationTest {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        new LogInApplication().start(stage);
+        new Application().start(stage);
     }
 
     /**
@@ -49,7 +47,7 @@ public class LogInControllerTest extends ApplicationTest {
     @BeforeClass
     public static void ClickApplicationTest() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(LogInApplication.class);
+        FxToolkit.setupApplication(Application.class);
     }
 
     /**

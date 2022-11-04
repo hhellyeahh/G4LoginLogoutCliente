@@ -5,12 +5,10 @@
  */
 package view.LogOut;
 
-import classes.User;
-import java.io.IOException;
+import application.Application;
 import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -18,11 +16,8 @@ import org.junit.runners.MethodSorters;
 import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
-import view.LogIn.LogInApplication;
 
 /**
  * Testing class for Logout view and controller
@@ -39,7 +34,7 @@ public class LogOutControllerTest extends ApplicationTest {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        new LogInApplication().start(stage);
+        new Application().start(stage);
     }
 
     /**
@@ -50,7 +45,7 @@ public class LogOutControllerTest extends ApplicationTest {
     @BeforeClass
     public static void ClickApplicationTest() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(LogInApplication.class);
+        FxToolkit.setupApplication(Application.class);
     }
 
     /**
