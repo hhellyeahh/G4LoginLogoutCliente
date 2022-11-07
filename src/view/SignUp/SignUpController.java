@@ -6,6 +6,7 @@
 package view.SignUp;
 
 import classes.*;
+import factories.FactoryClient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +29,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.LogIn.LogInController;
 
 /**
  *
@@ -294,20 +296,22 @@ public class SignUpController {
             newUser.setPrivilege(UserPrivilege.USER);
             newUser.setStatus(UserStatus.ENABLE);
 
-            //Carga el documento FXML y obtiene un objeto Parent
-            Parent root = FXMLLoader.load(getClass().getResource("../view/LogIn.fxml"));
-            //Crea una escena a partir del Parent
-            Scene scene = new Scene(root);
-            //Establece la escena en el escenario (Stage) y la muestra
-            Stage newStage = new Stage();
-            newStage.setResizable(false);
-            newStage.setTitle("LogIn");
-            newStage.getIcons().add(new Image("resources/img/icon.png"));
-            newStage.setScene(scene);
-            newStage.show();
+            LoginLogout clientLoginLogout = null;
 
+            try {
+                clientLoginLogout = FactoryClient.getLoginLogout();
+                clientLoginLogout.signUp(newUser);
+
+            } catch (Exception ex) {
+                Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
             new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
+            
+            //Close the stage
+            Stage stage = (Stage) this.btnContinue.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();

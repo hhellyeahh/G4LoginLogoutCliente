@@ -39,20 +39,17 @@ public class ClientImplementation implements LoginLogout {
             //Analizar el mensaje de resupuesta
             switch (returnMessage.getCallType()) {
                 case SERVER_ERROR_RESPONSE:
-
                     throw new ServerException("Error at reaching the server");
 
                 case INCORRECT_LOGIN_RESPONSE:
                     throw new IncorrectLoginException("User or password is incorrect or user does not exist");
 
                 case OKAY_RESPONSE:
-
                     user = returnMessage.getUser();
                     break;
 
                 default:
                     throw new UnknownTypeException("Unknown type of message");
-
             }
 
         } catch (IOException ex) {
@@ -78,20 +75,17 @@ public class ClientImplementation implements LoginLogout {
             //Analizar el mensaje de resupuesta
             switch (returnMessage.getCallType()) {
                 case SERVER_ERROR_RESPONSE:
-
                     throw new ServerException("Error at reaching the server");
 
                 case USER_ALREADY_EXIST_RESPONE:
                     throw new UserAlreadyExistExpection("User already exists");
 
                 case OKAY_RESPONSE:
-
                     user = returnMessage.getUser();
                     break;
 
                 default:
                     throw new UnknownTypeException("Unknown type of message");
-
             }
 
         } catch (IOException ex) {

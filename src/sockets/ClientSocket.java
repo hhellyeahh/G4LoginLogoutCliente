@@ -26,7 +26,6 @@ public class ClientSocket {
 
     public Message sendRecieve(Message mesg) throws IOException {
         try {
-            System.out.println("HOla");
             Socket skCliente = new Socket(HOST, PUERTO);
 
             OutputStream palServer = skCliente.getOutputStream();
