@@ -289,7 +289,7 @@ public class SignUpController {
 
             //The information of all text fields will be collected, validated, and stored in an object of type User.
             User newUser = new User();
-            newUser.setLogin(tfUsername.getText());
+            newUser.setLogin(tfUsername.getText().toLowerCase());
             newUser.setFullName(tfFullName.getText().trim());
             newUser.setEmail(tfEmail.getText());
             newUser.setPassword(pfPassword.getText());
