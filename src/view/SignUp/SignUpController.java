@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +28,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.LogIn.LogInController;
 
 /**
  *
@@ -38,6 +36,7 @@ import view.LogIn.LogInController;
 public class SignUpController {
 
     private Stage stage;
+    private static final Logger LOGGER = Logger.getLogger("view");
 
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9]*$";
     private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
@@ -303,8 +302,8 @@ public class SignUpController {
                 clientLoginLogout.signUp(newUser);
 
             } catch (Exception ex) {
-                //Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
                 throw new Exception(ex.getMessage());
+                //LOGGER.log(Level.SEVERE, ex.getMessage());
             }
            
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.

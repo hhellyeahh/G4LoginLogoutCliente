@@ -40,7 +40,7 @@ import view.SignUp.SignUpController;
  *
  * @author Leire, Zulu
  */
-public class LogInController{
+public class LogInController {
 
     private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
@@ -61,8 +61,8 @@ public class LogInController{
     private Pane pnLogIn;
 
     /**
-     * 
-     * @param root 
+     *
+     * @param root
      */
     public void initialize(Parent root) {
         LOGGER.info("initializing the window");
@@ -158,64 +158,53 @@ public class LogInController{
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
 
-        /*
-    try {
-            String usernameString = tfUsername.toString().toLowerCase();
-            if (usernameString.contains(" ")) {
-                IllegalUsernameException ex = new IllegalUsernameException("Username can not contain blank spaces");
-                throw ex;
+        try {
+            LOGGER.info("inicio de envio información al servidor");
+            User loginUser = new User();
+            loginUser.setLogin(tfUsername.getText());
+            loginUser.setPassword(pfPassword.getText());
+
+            LoginLogout clientLoginLogout = null;
+
+            try {
+                clientLoginLogout = FactoryClient.getLoginLogout();
+                loginUser = clientLoginLogout.logIn(loginUser);
+
+            } catch (Exception ex) {
+                throw new Exception(ex.getMessage());
             }
 
-        } catch (Exception e) {
-            showErrorAlert("Username can´t contain blank spaces");
-            LOGGER.log(Level.SEVERE, e.getMessage());
-        }
-         */
-        LOGGER.info("inicio de envio información al servidor");
-        User loginUser = new User();
-        loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText());
+            Stage stage = new Stage();
 
-        LoginLogout clientLoginLogout = null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
 
-        try {
-            clientLoginLogout = FactoryClient.getLoginLogout();
+            Parent root = (Parent) loader.load();
 
-            loginUser = clientLoginLogout.logIn(loginUser);
+            LogOutController controller = (LogOutController) loader.getController();
 
+            controller.setStage(stage);
+
+            controller.initData(loginUser);
+
+            controller.initialize(root);
+
+            tfUsername.setText("");
+            pfPassword.setText("");
         } catch (Exception ex) {
-            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+            showErrorAlert(ex.getMessage());
+            LOGGER.log(Level.SEVERE, ex.getMessage());
+
         }
-
-        // HACER UN IF DE SI EL USER RETURNEADO ES NULL SE SACA ALERTA SI NO ES NULL SE PROCEDE CON EL LA CREAUIB DE KA VEBTABA
-        Stage stage = new Stage();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
-
-        Parent root = (Parent) loader.load();
-
-        LogOutController controller = (LogOutController) loader.getController();
-
-        controller.setStage(stage);
-
-        controller.initData(loginUser);
-
-        controller.initialize(root);
-
-        tfUsername.setText("");
-        pfPassword.setText("");
-
     }
 
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
-        Alert alert = new Alert(Alert.AlertType.ERROR,errorMsg,ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR, errorMsg, ButtonType.OK);
         alert.showAndWait();
     }
-    
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
 }
-
