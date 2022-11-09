@@ -305,10 +305,10 @@ public class SignUpController {
                 throw new Exception(ex.getMessage());
                 //LOGGER.log(Level.SEVERE, ex.getMessage());
             }
-           
+
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
             new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
-            
+
             //Close the stage
             Stage stage = (Stage) this.btnContinue.getScene().getWindow();
             stage.close();
