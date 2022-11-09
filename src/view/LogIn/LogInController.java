@@ -209,9 +209,7 @@ public class LogInController{
 
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-                errorMsg,
-                ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR,errorMsg,ButtonType.OK);
         alert.showAndWait();
     }
     

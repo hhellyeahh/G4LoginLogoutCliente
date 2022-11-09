@@ -303,7 +303,8 @@ public class SignUpController {
                 clientLoginLogout.signUp(newUser);
 
             } catch (Exception ex) {
-                Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+                throw new Exception(ex.getMessage());
             }
            
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.

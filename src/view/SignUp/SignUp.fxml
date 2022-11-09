@@ -35,6 +35,11 @@
                   <Font size="15.0" />
                </font>
             </Text>
+            <Hyperlink fx:id="hlLogin" layoutX="242.0" layoutY="409.0" text="Log in" textFill="#6883b0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
             <Button fx:id="btnContinue" layoutX="177.0" layoutY="490.0" mnemonicParsing="false" style="-fx-background-color: #94BCB6;" text="Continue">
                <font>
                   <Font size="14.0" />
@@ -42,14 +47,9 @@
             </Button>
             <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="169.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/img/user.png" />
+                  <Image url="@../../resources/login/logInIcon.png" />
                </image>
             </ImageView>
-            <Hyperlink fx:id="hlLogin" layoutX="242.0" layoutY="409.0" text="Log in" textFill="#6883b0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Hyperlink>
             <Label fx:id="lblUsername" layoutX="60.0" layoutY="200.0" textFill="RED" />
             <Label fx:id="lblEmail" layoutX="60.0" layoutY="300.0" textFill="RED" />
             <Label fx:id="lblPassword" layoutX="60.0" layoutY="350.0" textFill="RED" />
