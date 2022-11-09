@@ -29,10 +29,5 @@
             <Image url="@../../resources/login/hojasSignup.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="373.0" fitWidth="354.0" layoutX="563.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/login/hojaLogin.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

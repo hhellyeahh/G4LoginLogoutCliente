@@ -53,7 +53,7 @@ public class LogInControllerTest extends ApplicationTest {
     /**
      * Test of initial state of LogIn view.
      */
-    @Test //TODO
+    @Test
     public void test1_LogInViewInitialState() {
         verifyThat("#tfUsername", hasText(""));
         verifyThat("#lblUsername", hasText(""));
