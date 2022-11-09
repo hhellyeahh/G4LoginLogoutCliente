@@ -24,7 +24,7 @@ public class ClientImplementation implements LoginLogout {
     private ClientSocket clientSocket = new ClientSocket();
 
     @Override
-    public User logIn(User user) throws IncorrectLoginException, ServerException, UnknownTypeException {
+    public User logIn(User user) throws IncorrectLoginException, ServerException, UnknownTypeException, MaxUserException {
 
         Message message = null;
 
@@ -43,6 +43,9 @@ public class ClientImplementation implements LoginLogout {
 
                 case INCORRECT_LOGIN_RESPONSE:
                     throw new IncorrectLoginException("User or password is incorrect or user does not exist");
+
+                case MAX_USERS_EXCEPTION:
+                    throw new MaxUserException("Maximum users");
 
                 case OKAY_RESPONSE:
                     user = returnMessage.getUser();

@@ -7,7 +7,14 @@ package view.LogIn;
 
 import application.Application;
 import java.util.concurrent.TimeoutException;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -28,6 +35,20 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LogInControllerTest extends ApplicationTest {
+    
+    private TextField tfUsername = lookup("#tfUsername").query();
+    
+    private Label lblUsername = lookup("#lblUsername").query();
+    
+    private PasswordField pfPassword = lookup("#pfPassword").query();
+    
+    private Label lblPassword = lookup("#lblPassword").query();
+    
+    private Button btnLogIn = lookup("#btnLogIn").query();
+    
+    private Pane pnLogOut;
+    
+    private Pane pnSignUp;
 
     /**
      * Starts application to be tested
@@ -54,12 +75,13 @@ public class LogInControllerTest extends ApplicationTest {
      * Test of initial state of LogIn view.
      */
     @Test
+    @Ignore
     public void test1_LogInViewInitialState() {
-        verifyThat("#tfUsername", hasText(""));
-        verifyThat("#lblUsername", hasText(""));
-        verifyThat("#pfPassword", hasText(""));
-        verifyThat("#lblPassword", hasText(""));
-        verifyThat("#btnLogIn", isDisabled());
+        assertEquals(tfUsername.getText(), "");
+        assertEquals(lblUsername.getText(), "");
+        assertEquals(pfPassword.getText(), "");
+        assertEquals(lblPassword.getText(), "");
+        verifyThat("#btnLogIn", isDisabled());       
     }
 
     /**
@@ -122,32 +144,34 @@ public class LogInControllerTest extends ApplicationTest {
     @Ignore
     public void test5_LogOutOpenedLogInClick() {
         clickOn("#tfUsername");
-        write("LeireCarrasco");
+        write("JanamRai");
         clickOn("#pfPassword");
         write("abcd*1234");
         clickOn("#btnLogIn");
         verifyThat("#pnLogOut", isVisible());
     }
+    
+    /**
+     * Test LogOut view is not opened when button Log In is clicked
+     */
+    @Test
+    public void test6_LogOutOpenedLogInClick() {
+        clickOn("#tfUsername");
+        write("LeireCarrasco");
+        clickOn("#pfPassword");
+        write("abcd*1234");
+        clickOn("#btnLogIn");
+        verifyThat("User or password is incorrect or user does not exist", isVisible());
+        clickOn("Aceptar");
+    }
 
     /**
      * Test LogOut view is opened when button Log In is clicked
      */
-    @Test //TODO 
+    @Test
     @Ignore
-    public void test6_SignUpOpenedSignUpClick() {
+    public void test7_SignUpOpenedSignUpClick() {
         clickOn("#hlSignUp");
         verifyThat("#pnSignUp", isVisible());
     }
-
-    /*
-    
-    @Test
-    public void testShowErrorAlert() {
-        String errorMsg = "";
-        LogInController instance = new LogInController();
-        instance.showErrorAlert(errorMsg);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-     */
 }

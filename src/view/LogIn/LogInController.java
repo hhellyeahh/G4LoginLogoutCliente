@@ -19,9 +19,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -30,7 +28,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -60,10 +57,6 @@ public class LogInController {
     @FXML
     private Pane pnLogIn;
 
-    /**
-     *
-     * @param root
-     */
     public void initialize(Parent root) {
         LOGGER.info("initializing the window");
 
@@ -76,6 +69,11 @@ public class LogInController {
         this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
 
+        /**
+         * Do not allow input spaces, when the user writes a space a red text
+         * will appear below the text field with a “We don't allow spaces in
+         * this field.”, when another letter is written the text will disappear.
+         */
         tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
@@ -90,6 +88,7 @@ public class LogInController {
             }
         });
 
+        //Focus
         tfUsername.requestFocus();
 
         //Disable login button.
@@ -131,7 +130,6 @@ public class LogInController {
     private void handleSignUpHyperlinkAction(ActionEvent event) {
         LOGGER.info("Probando a abrir ventana de registro");
         try {
-            //  loginUser = clientLoginLogout.login(loginUser);
             Stage stage = new Stage();
             FXMLLoader loader;
             loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
