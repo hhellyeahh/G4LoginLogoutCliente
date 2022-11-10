@@ -88,7 +88,7 @@ public class SignUpControllerTest extends ApplicationTest {
     //@Ignore
     public void Test_03_ContinueIsDisabled() {
 
-        clickOn("#janamrai");
+        clickOn("#tfUsername");
         write("Lmt10hunk");
         verifyThat("#btnContinue", isDisabled());
         eraseText(9);
