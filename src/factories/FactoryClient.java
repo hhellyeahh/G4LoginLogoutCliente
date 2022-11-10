@@ -6,7 +6,7 @@
 package factories;
 
 import classes.LoginLogout;
-import exceptions.UnknownModelTypeException;
+import exceptions.UnknownTypeException;
 import interfaces.ClientImplementation;
 
 /**
@@ -21,9 +21,9 @@ public class FactoryClient {
      * Load the data variable, if it is not previously loaded
      *
      * @return data LoginLogout
-     * @throws exceptions.UnknownModelTypeException
+     * @throws exceptions.UnknownTypeException
      */
-    public static LoginLogout getLoginLogout() throws UnknownModelTypeException {
+    public static LoginLogout getLoginLogout() throws UnknownTypeException {
 
         data = new ClientImplementation();
 

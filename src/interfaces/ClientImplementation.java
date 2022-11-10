@@ -9,7 +9,6 @@ package interfaces;
 import sockets.ClientSocket;
 import classes.*;
 import exceptions.*;
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.logging.Level;

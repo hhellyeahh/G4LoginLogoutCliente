@@ -16,25 +16,25 @@ import view.LogIn.LogInController;
  *
  * @author Leire
  */
-public class Application extends javafx.application.Application{
-    
+public class Application extends javafx.application.Application {
+
     /**
-     * 
+     *
      * @param stage
-     * @throws Exception 
+     * @throws Exception
      */
     public void start(Stage stage) throws Exception {
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LogIn/LogIn.fxml"));
-        
+
         Parent root = (Parent) loader.load();
-        
+
         LogInController controller = (LogInController) loader.getController();
 
         controller.setStage(stage);
 
         controller.initialize(root);
-        
+
         Scene scene = new Scene(root);
 
         stage.setResizable(false);
