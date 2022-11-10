@@ -24,7 +24,7 @@ import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
 /**
  *
- * @author Janam
+ * @author Janam & UnaiB
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignUpControllerTest extends ApplicationTest {
@@ -33,7 +33,6 @@ public class SignUpControllerTest extends ApplicationTest {
     private Label lblEmail = lookup("#lblEmail").query();
     private Label lblPassword = lookup("#lblPassword").query();
     private Label lblRepeatPassword = lookup("#lblRepeatPassword").query();
-    private Label labelSignUp = lookup("#labelSignUp").query();
 
     /**
      * Set up Java FX fixture for tests. This is a general approach for using a
@@ -126,7 +125,7 @@ public class SignUpControllerTest extends ApplicationTest {
     public void Test_04_ContinueIsEnabled() {
         
         clickOn("#tfUsername");
-        write("Lmt10hunk");
+        write("janamrai");
 
         clickOn("#tfFullName");
         write("Janam Rai");
@@ -144,7 +143,7 @@ public class SignUpControllerTest extends ApplicationTest {
         
         // Delete everything
         clickOn("#tfUsername");
-        eraseText(9);
+        eraseText(8);
         
         clickOn("#tfFullName");
         eraseText(9);
@@ -175,7 +174,7 @@ public class SignUpControllerTest extends ApplicationTest {
         assertEquals(lblUsername.getText(), "");
 
         clickOn("#tfEmail");
-        write("Lucasjanamsmile ");
+        write("lucasjanamsmile ");
         assertEquals(lblEmail.getText(), "We do not allow spaces in this field.");
         write("@gmail.com");
         assertEquals(lblEmail.getText(), "");

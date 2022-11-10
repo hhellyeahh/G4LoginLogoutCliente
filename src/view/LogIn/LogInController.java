@@ -105,6 +105,17 @@ public class LogInController {
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
+        
+        /**
+         * Maximum character permitted in username field will be 20, fullname
+         * and email 30 and password fields 8 minimum, 24 maximum
+         */
+        if (tfUsername.getText().length() > 20) {
+            tfUsername.setText(tfUsername.getText().substring(0, 20));
+        }
+         if (pfPassword.getText().length() > 24) {
+            pfPassword.setText(pfPassword.getText().substring(0, 24));
+        }
         //If any of these are empty the continue button will be disabled. 
         //If all of them are written it will be enabled.
         if (!(this.tfUsername.getText().equals(oldValue)) || !(this.pfPassword.getText().equals(oldValue))) {

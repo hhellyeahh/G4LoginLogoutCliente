@@ -45,7 +45,7 @@ public class ClientImplementation implements LoginLogout {
                     throw new IncorrectLoginException("User or password is incorrect or user does not exist");
 
                 case MAX_USERS_EXCEPTION:
-                    throw new MaxUserException("Maximum users");
+                    throw new MaxUserException("Server can not handle more users");
 
                 case OKAY_RESPONSE:
                     user = returnMessage.getUser();
@@ -63,7 +63,7 @@ public class ClientImplementation implements LoginLogout {
     }
 
     @Override
-    public User signUp(User user) throws ServerException, UserAlreadyExistExpection, UnknownTypeException {
+    public User signUp(User user) throws ServerException, UserAlreadyExistExpection, UnknownTypeException, MaxUserException {
 
         Message message = null;
 
@@ -82,6 +82,9 @@ public class ClientImplementation implements LoginLogout {
 
                 case USER_ALREADY_EXIST_RESPONE:
                     throw new UserAlreadyExistExpection("User already exists");
+
+                case MAX_USERS_EXCEPTION:
+                    throw new MaxUserException("Server can not handle more users");
 
                 case OKAY_RESPONSE:
                     user = returnMessage.getUser();
