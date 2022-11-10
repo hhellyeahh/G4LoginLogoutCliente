@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 2dam
+ * @author Zulu, Bonilla
  */
 public class ClientImplementation implements LoginLogout {
 

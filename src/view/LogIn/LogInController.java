@@ -143,7 +143,7 @@ public class LogInController {
         try {
             Stage stage = new Stage();
             FXMLLoader loader;
-            loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/view/SignUp/SignUp.fxml"));
             Parent root = (Parent) loader.load();
             SignUpController controller = (SignUpController) loader.getController();
             controller.setStage(stage);
@@ -185,7 +185,7 @@ public class LogInController {
 
             Stage stage = new Stage();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LogOut/LogOut.fxml"));
 
             Parent root = (Parent) loader.load();
 

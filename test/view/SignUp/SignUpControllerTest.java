@@ -7,7 +7,11 @@ package view.SignUp;
 
 import application.Application;
 import java.util.concurrent.TimeoutException;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -28,6 +32,13 @@ import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignUpControllerTest extends ApplicationTest {
+    
+    private TextField tfUsername = lookup("#tfUsername").query();
+    
+    private PasswordField pfPassword = lookup("#pfPassword").query();
+    private PasswordField pfRepeatPassword = lookup("#pfRepeatPassword").query();
+    
+    private Button btnContinue = lookup("#btnContinue").query();
     
     private Label lblUsername = lookup("#lblUsername").query();
     private Label lblEmail = lookup("#lblEmail").query();
