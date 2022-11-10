@@ -24,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.LogIn.IncorrectUserException;
 
 /**
  *
@@ -65,12 +64,12 @@ public class LogOutController {
     }
 
     //TODO botón cerrar alert
-     /**
-      * Handle Action event on LogOut button
-      * 
-      * @param event The action event object
-      * @throws IOException 
-      */
+    /**
+     * Handle Action event on LogOut button
+     *
+     * @param event The action event object
+     * @throws IOException
+     */
     @FXML
     public void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
@@ -95,13 +94,6 @@ public class LogOutController {
     }
 
     public void initData(User user) {
-        try {
-            if (user == null) {
-                throw new IncorrectUserException();
-            }
-            this.user = user;
-        } catch (IncorrectUserException iue) {
-
-        }
+        this.user = user;
     }
 }

@@ -38,7 +38,7 @@ public class SignUpController {
     private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
 
-    private static final String USERNAME_REGEX = "^[a-zA-Z0-9]*$";
+    private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
     private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PASSWORD_REGEX = "^[A-Za-z\\d@$!%*#?&]{8,}$";
@@ -275,11 +275,11 @@ public class SignUpController {
              * first surname.
              */
             if (!this.tfFullName.getText().trim().matches(FULLNAME_REGEX)) {
-                throw new Exception("Fullname field should be <name + surname>.");
+                throw new Exception("Fullname field should be <name (space) surname>.");
             }
             //Email text field will be validated with an email pattern.
             if (!this.tfEmail.getText().matches(EMAIL_REGEX)) {
-                throw new Exception("Email field does not correspond.");
+                throw new Exception("Email field does not correspond. \nExample: example@example.example");
             }
             //Password field and repeat password password field will allow special characters.
             if (!this.pfPassword.getText().matches(PASSWORD_REGEX)) {

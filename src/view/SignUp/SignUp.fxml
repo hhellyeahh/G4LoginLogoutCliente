@@ -25,9 +25,9 @@
             <TextField fx:id="tfEmail" layoutX="59.0" layoutY="270.0" prefHeight="30.0" prefWidth="300.0" promptText="Email Address" />
             <PasswordField fx:id="pfPassword" layoutX="59.0" layoutY="319.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" />
             <PasswordField fx:id="pfRepeatPassword" layoutX="59.0" layoutY="369.0" prefHeight="30.0" prefWidth="300.0" promptText="Repeat Password" />
-            <Text layoutX="61.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?" />
-            <Text layoutX="235.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!" />
-            <Hyperlink fx:id="hlLogin" layoutX="195.0" layoutY="413.0" text="Log in" textFill="#6883b0" />
+            <Text layoutX="148.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?" />
+            <Text layoutX="222.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!" />
+            <Hyperlink fx:id="hlLogin" layoutX="182.0" layoutY="433.0" text="Log in" textFill="#6883b0" />
             <Button fx:id="btnContinue" layoutX="177.0" layoutY="490.0" mnemonicParsing="false" style="-fx-background-color: #94BCB6;" text="Continue">
                <font>
                   <Font size="14.0" />

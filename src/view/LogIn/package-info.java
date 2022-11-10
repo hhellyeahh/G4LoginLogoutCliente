@@ -4,14 +4,3 @@
  * and open the template in the editor.
  */
 package view.LogIn;
-
-/**
- *
- * @author 2dam
- */
-public class IllegalUsernameException extends Exception {
-
-    public IllegalUsernameException(String username_cant_contain_blank_spaces) {
-    }
-    
-}
