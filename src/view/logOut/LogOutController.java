@@ -46,6 +46,7 @@ public class LogOutController {
         this.tfMessage.setTooltip(new Tooltip("Message"));
         this.btnLogOut.setTooltip(new Tooltip("Log Out"));
 
+        this.tfMessage.setEditable(false);
         this.tfMessage.setText("Welcome back: " + user.getLogin() + ".");
         Scene scene = new Scene(root);
 
