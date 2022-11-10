@@ -33,8 +33,8 @@
             <TextField fx:id="tfUsername" layoutX="80.0" layoutY="113.0" prefHeight="30.0" prefWidth="250.0" promptText="Username" />
             <PasswordField fx:id="pfPassword" layoutX="78.0" layoutY="164.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
             <Text layoutX="78.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You do not have an account?" />
-            <Hyperlink fx:id="hlSignUp" layoutX="231.0" layoutY="197.0" onAction="#handleSignUpHyperlinkAction" prefHeight="30.0" prefWidth="62.0" text="Sign up" />
-            <Text layoutX="279.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!" />
+            <Hyperlink fx:id="hlSignUp" layoutX="231.0" layoutY="197.0" onAction="#handleSignUpHyperlinkAction" prefHeight="30.0" prefWidth="49.0" text="Sign up" />
+            <Text layoutX="280.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!" />
             <Button fx:id="btnLogIn" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleLogInButtonAction" style="-fx-background-color: #94BCB6;" text="Log in" />
             <Label fx:id="lblUsername" layoutX="78.0" layoutY="142.0" textFill="RED">
                <font>
