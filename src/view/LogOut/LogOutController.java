@@ -50,16 +50,27 @@ public class LogOutController {
         this.tfMessage.setText("Welcome back: " + user.getLogin() + ".");
         Scene scene = new Scene(root);
 
+        //Modal window of LogIn.
         stage.initModality(Modality.WINDOW_MODAL);
-
+        //Not a resizable window.
         stage.setResizable(false);
+        //The window title will be ”LogOut”
         stage.setTitle("LogOut");
+        //Add a leaf icon.
         stage.getIcons().add(new Image("resources/login/icon.png"));
+        //Add scene
         stage.setScene(scene);
+        //Show window
         stage.show();
     }
 
     //TODO botón cerrar alert
+     /**
+      * Handle Action event on LogOut button
+      * 
+      * @param event The action event object
+      * @throws IOException 
+      */
     @FXML
     public void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
