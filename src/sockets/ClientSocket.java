@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  */
 public class ClientSocket {
 
-    private final ResourceBundle configFile = ResourceBundle.getBundle("view.LogIn.config");
+    private final ResourceBundle configFile = ResourceBundle.getBundle("config.config");
     private final Integer PUERTO = Integer.parseInt(configFile.getString("PORT"));
     private final String HOST = configFile.getString("HOST");
     private Message msgRecibo = new Message();
