@@ -77,7 +77,7 @@ public class SignUpController {
         //Not a resizable window.
         stage.setResizable(false);
         //Modal window of LogIn.
-        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         //The window title will be ”SignUp”
         stage.setTitle("SignUp");
         //Add a leaf icon.

@@ -50,7 +50,7 @@ public class LogOutController {
         Scene scene = new Scene(root);
 
         //Modal window of LogIn.
-        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         //Not a resizable window.
         stage.setResizable(false);
         //The window title will be ”LogOut”
