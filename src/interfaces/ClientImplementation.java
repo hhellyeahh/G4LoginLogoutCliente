@@ -16,12 +16,23 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Zulu, Bonilla
+ * @author ZuluyBonilla
  */
 public class ClientImplementation implements LoginLogout {
 
     private ClientSocket clientSocket = new ClientSocket();
 
+    /**
+     * This method checks if the user is found in the database.
+     * If there were any errors, it would be caught and a message would be sent
+     * depending on the given error.
+     * @param user User who wants to log in
+     * @return user who wants to log in
+     * @throws IncorrectLoginException if the user or the password does not exist
+     * @throws ServerException if the server does not response
+     * @throws UnknownTypeException all the others excepcions 
+     * @throws MaxUserException if server can not handle more users
+     */
     @Override
     public User logIn(User user) throws IncorrectLoginException, ServerException, UnknownTypeException, MaxUserException {
 
@@ -61,6 +72,16 @@ public class ClientImplementation implements LoginLogout {
         return user;
     }
 
+    /**
+     * This method checks if the user when registering is in the database,
+     * if it were, it would give you an error. It also catches other types of errors.
+     * @param user User who wants to sign up
+     * @return user who wants to sign up
+     * @throws ServerException if the server does not response
+     * @throws UserAlreadyExistExpection if the user already exist
+     * @throws UnknownTypeException all the others excepcions 
+     * @throws MaxUserException if server can not handle more users
+     */
     @Override
     public User signUp(User user) throws ServerException, UserAlreadyExistExpection, UnknownTypeException, MaxUserException {
 

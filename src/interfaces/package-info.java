@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package interfaces;
+
+/**
+ * This folder contains the client implementation
+ */
