@@ -10,7 +10,7 @@ import interfaces.ClientImplementation;
 
 /**
  *
- * @author Leire&Zulu
+ * @author LeireZulu
  */
 public class FactoryClient {
 
