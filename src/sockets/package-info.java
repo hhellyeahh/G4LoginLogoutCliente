@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package sockets;
+
+/**
+ * This package contains all the resources for the view
+ */

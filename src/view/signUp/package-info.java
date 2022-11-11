@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package view.signUp;
+
+/**
+ * This package contains all the functionality of the signup view and signup xml
+ */

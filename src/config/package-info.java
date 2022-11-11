@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package config;
+
+/**
+ * This package contains configuration of an application
+ */

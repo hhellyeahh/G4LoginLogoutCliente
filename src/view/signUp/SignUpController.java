@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author unaib
+ * @author unai&janam
  */
 public class SignUpController {
 
@@ -72,6 +72,11 @@ public class SignUpController {
     @FXML
     private Label labelSignUp;
 
+    /**
+     * The Parent object representing root node of view graph.
+     *
+     * @param root
+     */
     public void initialize(Parent root) {
         Scene scene = new Scene(root);
         //Not a resizable window.
@@ -140,10 +145,24 @@ public class SignUpController {
         btnContinue.setCursor(Cursor.HAND);
     }
 
+    /**
+     * returns stage
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     *
+     * Validates that user, fullname, email, password, and repeatpassword fields has any content to enable/disable
+     * continue button.
+     *
+     * @param observable The value being observed.
+     * @param oldValue The old value of the observable.
+     * @param newValue The new value of the observable.
+     */
     public void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
@@ -241,9 +260,7 @@ public class SignUpController {
      */
     private void handleHyperlinkLogInAction(ActionEvent event) {
 
-        /**
-         * Close the SignUp and open the login window.
-         */
+        //Close the SignUp and open the login window.
         try {
             Stage stage = (Stage) this.hlLogin.getScene().getWindow();
             stage.close();
