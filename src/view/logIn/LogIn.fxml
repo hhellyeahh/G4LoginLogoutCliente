@@ -37,12 +37,12 @@
                         <Font name="Lucida Sans Regular" size="12.0" />
                     </font>
                 </Text>
-                <Hyperlink fx:id="hlSignUp" layoutX="157.0" layoutY="217.0" onAction="#handleSignUpHyperlinkAction" prefHeight="30.0" prefWidth="69.0" text="Sign up">
+                <Hyperlink fx:id="hlSignUp" layoutX="150.0" layoutY="217.0" onAction="#handleSignUpHyperlinkAction" prefHeight="30.0" prefWidth="62.0" text="Sign up">
                     <font>
                         <Font name="Lucida Sans Regular" size="12.0" />
                     </font>
                 </Hyperlink>
-                <Text layoutX="210.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!">
+                <Text layoutX="212.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here!">
                     <font>
                         <Font name="Lucida Sans Regular" size="12.0" />
                     </font>
