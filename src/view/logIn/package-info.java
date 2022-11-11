@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package view.logIn;
+
+/**
+ * This folder contains the main application
+ */
