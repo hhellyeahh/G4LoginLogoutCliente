@@ -6,12 +6,11 @@
 package factories;
 
 import classes.LoginLogout;
-import exceptions.UnknownTypeException;
 import interfaces.ClientImplementation;
 
 /**
  *
- * @author Leire, Zulu
+ * @author Leire&Zulu
  */
 public class FactoryClient {
 
@@ -21,9 +20,8 @@ public class FactoryClient {
      * Load the data variable, if it is not previously loaded
      *
      * @return data LoginLogout
-     * @throws exceptions.UnknownTypeException
      */
-    public static LoginLogout getLoginLogout() throws UnknownTypeException {
+    public static LoginLogout getLoginLogout() {
 
         data = new ClientImplementation();
 
