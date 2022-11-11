@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package sockets;
 
 import classes.Message;
@@ -8,16 +14,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
+ * 
  * @author 2dam
  */
+
 public class ClientSocket {
 
     private final ResourceBundle configFile = ResourceBundle.getBundle("config.config");
@@ -25,6 +28,12 @@ public class ClientSocket {
     private final String HOST = configFile.getString("HOST");
     private Message msgRecibo = new Message();
 
+    /**
+     * Class that receive and sends messages
+     * @param mesg
+     * @return
+     * @throws IOException 
+     */
     public Message sendRecieve(Message mesg) throws IOException {
         try {
             Socket skCliente = new Socket(HOST, PUERTO);
@@ -33,14 +42,14 @@ public class ClientSocket {
             ObjectOutputStream flujo2 = new ObjectOutputStream(palServer);
             flujo2.writeObject(mesg);
 
-            //RECIBO
+            //Receive message
             InputStream aux = skCliente.getInputStream();
             ObjectInputStream flujo = new ObjectInputStream(aux);
             msgRecibo = (Message) flujo.readObject();
             skCliente.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            java.util.logging.Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, e);
         }
         return msgRecibo;
     }
