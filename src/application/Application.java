@@ -19,8 +19,8 @@ import view.logIn.LogInController;
 public class Application extends javafx.application.Application {
 
     /**
-     *
-     * @param stage
+     * Open the login window
+     * @param stage Stage where the scene will be projected
      * @throws Exception
      */
     public void start(Stage stage) throws Exception {
