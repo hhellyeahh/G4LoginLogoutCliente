@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package view.logOut;
+
+/**
+ * This folder contains the logout view
+ */
