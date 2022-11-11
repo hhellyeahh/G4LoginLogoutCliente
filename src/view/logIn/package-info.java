@@ -6,5 +6,5 @@
 package view.logIn;
 
 /**
- * This folder contains the main application
+ * This folder contains the login view
  */
