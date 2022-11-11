@@ -1,13 +1,13 @@
 package sockets;
 
 import classes.Message;
-import classes.Message;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ResourceBundle;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,13 +20,13 @@ import java.net.Socket;
  */
 public class ClientSocket {
 
-    private static final String HOST = "localhost";
-    private static final int PUERTO = 5000;
+    private final ResourceBundle configFile = ResourceBundle.getBundle("config.config");
+    private final Integer PUERTO = Integer.parseInt(configFile.getString("PORT"));
+    private final String HOST = configFile.getString("HOST");
     private Message msgRecibo = new Message();
 
     public Message sendRecieve(Message mesg) throws IOException {
         try {
-            System.out.println("HOla");
             Socket skCliente = new Socket(HOST, PUERTO);
 
             OutputStream palServer = skCliente.getOutputStream();

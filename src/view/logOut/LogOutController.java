@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.LogOut;
+package view.logOut;
 
 import classes.User;
 import java.io.IOException;
@@ -24,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.LogIn.IncorrectUserException;
 
 /**
  *
@@ -47,19 +46,31 @@ public class LogOutController {
         this.tfMessage.setTooltip(new Tooltip("Message"));
         this.btnLogOut.setTooltip(new Tooltip("Log Out"));
 
+        this.tfMessage.setEditable(false);
         this.tfMessage.setText("Welcome back: " + user.getLogin() + ".");
         Scene scene = new Scene(root);
 
-        stage.initModality(Modality.WINDOW_MODAL);
-
+        //Modal window of LogIn.
+        stage.initModality(Modality.APPLICATION_MODAL);
+        //Not a resizable window.
         stage.setResizable(false);
+        //The window title will be ”LogOut”
         stage.setTitle("LogOut");
-        stage.getIcons().add(new Image("resources/login/icon.png"));
+        //Add a leaf icon.
+        stage.getIcons().add(new Image("resources/icon.png"));
+        //Add scene
         stage.setScene(scene);
+        //Show window
         stage.show();
     }
 
     //TODO botón cerrar alert
+    /**
+     * Handle Action event on LogOut button
+     *
+     * @param event The action event object
+     * @throws IOException
+     */
     @FXML
     public void handleLogOutButtonAction(ActionEvent event) throws IOException {
 
@@ -84,13 +95,6 @@ public class LogOutController {
     }
 
     public void initData(User user) {
-        try {
-            if (user == null) {
-                throw new IncorrectUserException();
-            }
-            this.user = user;
-        } catch (IncorrectUserException iue) {
-
-        }
+        this.user = user;
     }
 }

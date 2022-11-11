@@ -7,13 +7,20 @@ package view.SignUp;
 
 import application.Application;
 import java.util.concurrent.TimeoutException;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import static org.junit.Assert.*;
+import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
@@ -21,10 +28,22 @@ import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
 /**
  *
- * @author Janam
+ * @author Janam & UnaiB
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignUpControllerTest extends ApplicationTest {
+    
+    private TextField tfUsername = lookup("#tfUsername").query();
+    
+    private PasswordField pfPassword = lookup("#pfPassword").query();
+    private PasswordField pfRepeatPassword = lookup("#pfRepeatPassword").query();
+    
+    private Button btnContinue = lookup("#btnContinue").query();
+    
+    private Label lblUsername = lookup("#lblUsername").query();
+    private Label lblEmail = lookup("#lblEmail").query();
+    private Label lblPassword = lookup("#lblPassword").query();
+    private Label lblRepeatPassword = lookup("#lblRepeatPassword").query();
 
     /**
      * Set up Java FX fixture for tests. This is a general approach for using a
@@ -42,6 +61,7 @@ public class SignUpControllerTest extends ApplicationTest {
      * Test SignUp window is opened when SignUp Hyperlink is clicked
      */
     @Test
+    //@Ignore
     public void Test_01_SignUpOpenedSignUpClick() {
         clickOn("#hlSignUp");
         verifyThat("#pnSignUp", isVisible());
@@ -51,21 +71,22 @@ public class SignUpControllerTest extends ApplicationTest {
      * Test of initialize method, of class SignUpController.
      */
     @Test
+    //@Ignore
     public void Test_02_Initialize() {
 
         verifyThat("#tfUsername", hasText(""));
-        verifyThat("#lblUsername", hasText(""));
+        assertEquals(lblUsername.getText(), "");
 
         verifyThat("#tfFullName", hasText(""));
 
         verifyThat("#tfEmail", hasText(""));
-        verifyThat("#lblEmail", hasText(""));
+        assertEquals(lblEmail.getText(), "");
 
         verifyThat("#pfPassword", hasText(""));
-        verifyThat("#lblPassword", hasText(""));
+        assertEquals(lblPassword.getText(), "");
 
         verifyThat("#pfRepeatPassword", hasText(""));
-        verifyThat("#lblRepeatPassword", hasText(""));
+        assertEquals(lblRepeatPassword.getText(), "");
 
         verifyThat("#btnContinue", isDisabled());
     }
@@ -75,6 +96,7 @@ public class SignUpControllerTest extends ApplicationTest {
      * password or repeatpassword are empty.
      */
     @Test
+    //@Ignore
     public void Test_03_ContinueIsDisabled() {
 
         clickOn("#tfUsername");
@@ -110,10 +132,11 @@ public class SignUpControllerTest extends ApplicationTest {
      * password and repeatpassword are filled.
      */
     @Test
+    //@Ignore
     public void Test_04_ContinueIsEnabled() {
-
+        
         clickOn("#tfUsername");
-        write("Lmt10hunk");
+        write("janamrai");
 
         clickOn("#tfFullName");
         write("Janam Rai");
@@ -128,54 +151,83 @@ public class SignUpControllerTest extends ApplicationTest {
         write("abcd*1234");
 
         verifyThat("#btnContinue", isEnabled());
+        
+        // Delete everything
+        clickOn("#tfUsername");
+        eraseText(8);
+        
+        clickOn("#tfFullName");
+        eraseText(9);
+        
+        clickOn("#tfEmail");
+        eraseText(24);
+        clickOn("#tfEmail");
+        eraseText(1);
+        
+        clickOn("#pfPassword");
+        eraseText(9);
+        
+        clickOn("#pfRepeatPassword");
+        eraseText(9);
     }
 
     /**
      * Test that labels Works
      */
     @Test
+    //@Ignore
     public void Test_05_LabelsWorks() {
 
         clickOn("#tfUsername");
         write("Janam ");
-        verifyThat("#lblUsername", hasText("We don't allow spaces in this field."));
+        assertEquals(lblUsername.getText(), "We do not allow spaces in this field.");
         write("Rai");
-        verifyThat("#lblUsername", hasText(""));
+        assertEquals(lblUsername.getText(), "");
 
         clickOn("#tfEmail");
-        write("Lucasjanamsmile ");
-        verifyThat("#lblEmail", hasText("We don't allow spaces in this field."));
+        write("lucasjanamsmile ");
+        assertEquals(lblEmail.getText(), "We do not allow spaces in this field.");
         write("@gmail.com");
-        verifyThat("#lblEmail", hasText(""));
+        assertEquals(lblEmail.getText(), "");
 
         clickOn("#pfPassword");
         write("abcd* ");
-        verifyThat("#lblPassword", hasText("We don't allow spaces in this field."));
+        assertEquals(lblPassword.getText(), "We do not allow spaces in this field.");
         write("1234");
-        verifyThat("#lblPassword", hasText(""));
+        assertEquals(lblPassword.getText(), "");
 
         clickOn("#pfRepeatPassword");
         write("abcd* ");
-        verifyThat("#lblRepeatPassword", hasText("We don't allow spaces in this field."));
+        assertEquals(lblRepeatPassword.getText(), "We do not allow spaces in this field.");
         write("1234");
-        verifyThat("#lblRepeatPassword", hasText(""));
+        assertEquals(lblRepeatPassword.getText(), "");
     }
 
     /**
-     * Test that signUp window is Closed when Continue BUtton is clicked
+     * Test that signUp window is Closed when Continue Button is clicked
      */
     @Test
+    //@Ignore
     public void Test_06_SignUpWindowClosedOnContinueClick() {
+        
+        clickOn("#tfFullName");
+        write("Janam Rai");
 
+        clickOn("#btnContinue");
+        verifyThat("#pnLogIn", isVisible());
     }
-
+    
     /**
      * Test that Login window is opened when Login Hyperlink is clicked
      */
     @Test
+    //@Ignore
     public void Test_07_LogInWindowOpenedOnLogInClick() {
 
         clickOn("#hlLogin");
         verifyThat("#pnLogIn", isVisible());
+        
+        clickOn("#hlSignUp");
+        verifyThat("#pnSignUp", isVisible());
     }
 }

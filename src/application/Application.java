@@ -10,36 +10,36 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import view.LogIn.LogInController;
+import view.logIn.LogInController;
 
 /**
  *
  * @author Leire
  */
-public class Application extends javafx.application.Application{
-    
+public class Application extends javafx.application.Application {
+
     /**
-     * 
+     *
      * @param stage
-     * @throws Exception 
+     * @throws Exception
      */
     public void start(Stage stage) throws Exception {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LogIn/LogIn.fxml"));
-        
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/logIn/LogIn.fxml"));
+
         Parent root = (Parent) loader.load();
-        
+
         LogInController controller = (LogInController) loader.getController();
 
         controller.setStage(stage);
 
         controller.initialize(root);
-        
+
         Scene scene = new Scene(root);
 
         stage.setResizable(false);
         stage.setTitle("LogIn");
-        stage.getIcons().add(new Image("/resources/login/icon.png"));
+        stage.getIcons().add(new Image("/resources/icon.png"));
 
         stage.setScene(scene);
         stage.show();

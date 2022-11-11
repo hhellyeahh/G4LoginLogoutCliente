@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.SignUp;
+package view.signUp;
 
 import classes.*;
+import factories.FactoryClient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,8 +36,9 @@ import javafx.stage.Stage;
 public class SignUpController {
 
     private Stage stage;
+    private static final Logger LOGGER = Logger.getLogger("view");
 
-    private static final String USERNAME_REGEX = "^[a-zA-Z0-9]*$";
+    private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
     private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PASSWORD_REGEX = "^[A-Za-z\\d@$!%*#?&]{8,}$";
@@ -76,11 +77,11 @@ public class SignUpController {
         //Not a resizable window.
         stage.setResizable(false);
         //Modal window of LogIn.
-        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         //The window title will be ”SignUp”
         stage.setTitle("SignUp");
         //Add a leaf icon.
-        stage.getIcons().add(new Image("resources/img/icon.png"));
+        stage.getIcons().add(new Image("resources/icon.png"));
         //Add scene
         stage.setScene(scene);
         //Show window
@@ -274,11 +275,11 @@ public class SignUpController {
              * first surname.
              */
             if (!this.tfFullName.getText().trim().matches(FULLNAME_REGEX)) {
-                throw new Exception("Fullname field should be <name + surname>.");
+                throw new Exception("Fullname field should be <name (space) surname>.");
             }
             //Email text field will be validated with an email pattern.
             if (!this.tfEmail.getText().matches(EMAIL_REGEX)) {
-                throw new Exception("Email field does not correspond.");
+                throw new Exception("Email field does not correspond. \nExample: example@example.example");
             }
             //Password field and repeat password password field will allow special characters.
             if (!this.pfPassword.getText().matches(PASSWORD_REGEX)) {
@@ -287,27 +288,30 @@ public class SignUpController {
 
             //The information of all text fields will be collected, validated, and stored in an object of type User.
             User newUser = new User();
-            newUser.setLogin(tfUsername.getText());
+            newUser.setLogin(tfUsername.getText().toLowerCase());
             newUser.setFullName(tfFullName.getText().trim());
             newUser.setEmail(tfEmail.getText());
             newUser.setPassword(pfPassword.getText());
             newUser.setPrivilege(UserPrivilege.USER);
             newUser.setStatus(UserStatus.ENABLE);
 
-            //Carga el documento FXML y obtiene un objeto Parent
-            Parent root = FXMLLoader.load(getClass().getResource("../view/LogIn.fxml"));
-            //Crea una escena a partir del Parent
-            Scene scene = new Scene(root);
-            //Establece la escena en el escenario (Stage) y la muestra
-            Stage newStage = new Stage();
-            newStage.setResizable(false);
-            newStage.setTitle("LogIn");
-            newStage.getIcons().add(new Image("resources/img/icon.png"));
-            newStage.setScene(scene);
-            newStage.show();
+            LoginLogout clientLoginLogout = null;
+
+            try {
+                clientLoginLogout = FactoryClient.getLoginLogout();
+                clientLoginLogout.signUp(newUser);
+
+            } catch (Exception ex) {
+                throw new Exception(ex.getMessage());
+                //LOGGER.log(Level.SEVERE, ex.getMessage());
+            }
 
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
             new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
+
+            //Close the stage
+            Stage stage = (Stage) this.btnContinue.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();

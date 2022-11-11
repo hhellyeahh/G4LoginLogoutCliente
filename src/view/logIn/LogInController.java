@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.LogIn;
+package view.logIn;
 
 /**
  *
  * @author Leire, Zulu
  */
-import view.LogOut.LogOutController;
+import view.logOut.LogOutController;
 import classes.*;
 import factories.FactoryClient;
 import java.io.IOException;
@@ -19,9 +19,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -30,17 +28,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.SignUp.SignUpController;
+import view.signUp.SignUpController;
 
 /**
  *
  * @author Leire, Zulu
  */
-public class LogInController{
+public class LogInController {
 
     private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
@@ -60,10 +57,6 @@ public class LogInController{
     @FXML
     private Pane pnLogIn;
 
-    /**
-     * 
-     * @param root 
-     */
     public void initialize(Parent root) {
         LOGGER.info("initializing the window");
 
@@ -76,6 +69,11 @@ public class LogInController{
         this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
 
+        /**
+         * Do not allow input spaces, when the user writes a space a red text
+         * will appear below the text field with a “We don't allow spaces in
+         * this field.”, when another letter is written the text will disappear.
+         */
         tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
@@ -90,6 +88,7 @@ public class LogInController{
             }
         });
 
+        //Focus
         tfUsername.requestFocus();
 
         //Disable login button.
@@ -106,6 +105,17 @@ public class LogInController{
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
             String newValue) {
+
+        /**
+         * Maximum character permitted in username field will be 20, fullname
+         * and email 30 and password fields 8 minimum, 24 maximum
+         */
+        if (tfUsername.getText().length() > 20) {
+            tfUsername.setText(tfUsername.getText().substring(0, 20));
+        }
+        if (pfPassword.getText().length() > 24) {
+            pfPassword.setText(pfPassword.getText().substring(0, 24));
+        }
         //If any of these are empty the continue button will be disabled. 
         //If all of them are written it will be enabled.
         if (!(this.tfUsername.getText().equals(oldValue)) || !(this.pfPassword.getText().equals(oldValue))) {
@@ -131,10 +141,9 @@ public class LogInController{
     private void handleSignUpHyperlinkAction(ActionEvent event) {
         LOGGER.info("Probando a abrir ventana de registro");
         try {
-            //  loginUser = clientLoginLogout.login(loginUser);
             Stage stage = new Stage();
             FXMLLoader loader;
-            loader = new FXMLLoader(getClass().getResource("../SignUp/SignUp.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/view/signUp/SignUp.fxml"));
             Parent root = (Parent) loader.load();
             SignUpController controller = (SignUpController) loader.getController();
             controller.setStage(stage);
@@ -158,66 +167,53 @@ public class LogInController{
     @FXML
     private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
 
-        /*
-    try {
-            String usernameString = tfUsername.toString().toLowerCase();
-            if (usernameString.contains(" ")) {
-                IllegalUsernameException ex = new IllegalUsernameException("Username can not contain blank spaces");
-                throw ex;
+        try {
+            LOGGER.info("inicio de envio información al servidor");
+            User loginUser = new User();
+            loginUser.setLogin(tfUsername.getText());
+            loginUser.setPassword(pfPassword.getText());
+
+            LoginLogout clientLoginLogout = null;
+
+            try {
+                clientLoginLogout = FactoryClient.getLoginLogout();
+                loginUser = clientLoginLogout.logIn(loginUser);
+
+            } catch (Exception ex) {
+                throw new Exception(ex.getMessage());
             }
 
-        } catch (Exception e) {
-            showErrorAlert("Username can´t contain blank spaces");
-            LOGGER.log(Level.SEVERE, e.getMessage());
-        }
-         */
-        LOGGER.info("inicio de envio información al servidor");
-        User loginUser = new User();
-        loginUser.setLogin(tfUsername.getText());
-        loginUser.setPassword(pfPassword.getText());
+            Stage stage = new Stage();
 
-        LoginLogout clientLoginLogout = null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/logOut/LogOut.fxml"));
 
-        try {
-            clientLoginLogout = FactoryClient.getLoginLogout();
+            Parent root = (Parent) loader.load();
 
-            loginUser = clientLoginLogout.logIn(loginUser);
+            LogOutController controller = (LogOutController) loader.getController();
 
+            controller.setStage(stage);
+
+            controller.initData(loginUser);
+
+            controller.initialize(root);
+
+            tfUsername.setText("");
+            pfPassword.setText("");
         } catch (Exception ex) {
-            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+            showErrorAlert(ex.getMessage());
+            LOGGER.log(Level.SEVERE, ex.getMessage());
+
         }
-
-        // HACER UN IF DE SI EL USER RETURNEADO ES NULL SE SACA ALERTA SI NO ES NULL SE PROCEDE CON EL LA CREAUIB DE KA VEBTABA
-        Stage stage = new Stage();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../LogOut/LogOut.fxml"));
-
-        Parent root = (Parent) loader.load();
-
-        LogOutController controller = (LogOutController) loader.getController();
-
-        controller.setStage(stage);
-
-        controller.initData(loginUser);
-
-        controller.initialize(root);
-
-        tfUsername.setText("");
-        pfPassword.setText("");
-
     }
 
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-                errorMsg,
-                ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR, errorMsg, ButtonType.OK);
         alert.showAndWait();
     }
-    
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
 }
-

@@ -22,7 +22,7 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 /**
  * Testing class for Logout view and controller
  * Tests logout view behavior using TestFX framework
- * @author Leire
+ * @author Leire, Zulu
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LogOutControllerTest extends ApplicationTest {
@@ -56,13 +56,13 @@ public class LogOutControllerTest extends ApplicationTest {
     @Test
     public void test1_LogOutOpenedLogInClick() {
         clickOn("#tfUsername");
-        write("LeireCarrasco");
+        write("bbonllo");
         clickOn("#pfPassword");
         write("abcd*1234");
         clickOn("#btnLogIn");
         verifyThat("#pnLogOut", isVisible());
         
-        verifyThat("Welcome back: LeireCarrasco.", isVisible());
+        verifyThat("Welcome back: bbonllo.", isVisible());
         verifyThat("#btnLogOut", isEnabled());
         
         clickOn("#btnLogOut");
@@ -78,75 +78,17 @@ public class LogOutControllerTest extends ApplicationTest {
     @Test
     public void test2_LogOutOpenedLogInClick() {
         clickOn("#tfUsername");
-        write("LeireCarrasco");
+        write("bbonllo");
         clickOn("#pfPassword");
         write("abcd*1234");
         clickOn("#btnLogIn");
         verifyThat("#pnLogOut", isVisible());
         
-        verifyThat("Welcome back: LeireCarrasco.", isVisible());
+        verifyThat("Welcome back: bbonllo.", isVisible());
         verifyThat("#btnLogOut", isEnabled());
         
         clickOn("#btnLogOut");
         verifyThat("Do you want to log out or exit the application?", isVisible());
         clickOn("Exit");
     }
-    
-    /**
-     * Test of initial state of LogOut view.
-     */
-    @Test
-    @Ignore
-    public void test2_LogOutInitialState() {
-        //verifyThat("#tfMessage", hasText("Welcome back: LeireCarrasco."));
-        verifyThat("Welcome back: LeireCarrasco.", isVisible());
-        verifyThat("#btnLogOut", isEnabled());
-    }
-
-    /**
-     * Test of the alert Log Out Button
-     */
-    @Test
-    @Ignore
-    public void test3_HandleLogOutButtonAction(){
-        clickOn("#btnLogOut");
-        verifyThat("Do you want to log out or exit the application?", isVisible());
-        clickOn("Log out");
-    }
-    
-    /**
-     * Test of the alert exit Button
-     */
-    @Test
-    @Ignore
-    public void test4_HandleExitButtonAction(){
-        clickOn("#btnLogOut");
-        verifyThat("Do you want to log out or exit the application?", isVisible());
-        clickOn("Exit");
-    }
-
-    /**
-     * Test of setStage method, of class LogOutController.
-     *//*
-    @Test
-    public void testSetStage() {
-        Stage stage = null;
-        LogOutController instance = new LogOutController();
-        instance.setStage(stage);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-*/
-    /**
-     * Test of initData method, of class LogOutController.
-     *//*
-    @Test
-    public void testInitData() {
-        User user = null;
-        LogOutController instance = new LogOutController();
-        instance.initData(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-*/
 }
