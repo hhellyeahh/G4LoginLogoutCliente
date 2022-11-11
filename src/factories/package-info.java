@@ -4,3 +4,7 @@
  * and open the template in the editor.
  */
 package factories;
+
+/**
+ * This package load data variable, if it is not previously loaded
+ */
