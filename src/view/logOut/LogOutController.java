@@ -26,8 +26,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Leire, Zulu
+ *Controller UI class for Logout view. It contains 
+ * event handlers and initialization code for the view defined in Logout.fxml file.
+ * @author LeireyZulu
  */
 public class LogOutController {
 
@@ -41,6 +42,10 @@ public class LogOutController {
     @FXML
     private Pane pnLogOut;
 
+    /**
+     * Method for initializing Logout Stage. 
+     * @param root The Parent object representing root node of view graph.
+     */
     public void initialize(Parent root) {
         //Tooltips
         this.tfMessage.setTooltip(new Tooltip("Message"));
@@ -64,10 +69,9 @@ public class LogOutController {
         stage.show();
     }
 
-    //TODO botón cerrar alert
     /**
-     * Handle Action event on LogOut button
-     *
+     * Handle Action event on LogOut button. 
+     * 
      * @param event The action event object
      * @throws IOException
      */
@@ -90,10 +94,19 @@ public class LogOutController {
         }
     }
 
+    /**
+     * Return the stage
+     * @param stage 
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * This method receives a user from the login window
+     * to be able to teach the user in this window
+     * @param user receives the user from the login window
+     */
     public void initData(User user) {
         this.user = user;
     }

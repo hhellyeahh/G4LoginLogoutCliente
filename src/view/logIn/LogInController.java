@@ -5,10 +5,6 @@
  */
 package view.logIn;
 
-/**
- *
- * @author Leire, Zulu
- */
 import view.logOut.LogOutController;
 import classes.*;
 import factories.FactoryClient;
@@ -34,8 +30,9 @@ import javafx.stage.Stage;
 import view.signUp.SignUpController;
 
 /**
- *
- * @author Leire, Zulu
+ *Controller UI class for Login view in users' management application. It contains 
+ * event handlers and initialization code for the view defined in Login.fxml file.
+ * @author LeireyZulu
  */
 public class LogInController {
 
@@ -56,7 +53,12 @@ public class LogInController {
     private Button btnLogIn;
     @FXML
     private Pane pnLogIn;
+    
 
+    /**
+     * Method for initializing Login Stage. 
+     * @param root The Parent object representing root node of view graph.
+     */
     public void initialize(Parent root) {
         LOGGER.info("initializing the window");
 
@@ -97,10 +99,11 @@ public class LogInController {
     }
 
     /**
-     *
-     * @param observable
-     * @param oldValue
-     * @param newValue
+     * Text changed event handler. It validates that user and password fields 
+     * has any content to enable/disable LogIn button.
+     * @param observable The value being observed.
+     * @param oldValue The old value of the observable.
+     * @param newValue The new value of the observable.
      */
     private void handleFieldsTextChange(ObservableValue observable,
             String oldValue,
@@ -206,12 +209,20 @@ public class LogInController {
         }
     }
 
+    /**
+     * Show error alert
+     * @param errorMsg Receive error string
+     */
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
         Alert alert = new Alert(Alert.AlertType.ERROR, errorMsg, ButtonType.OK);
         alert.showAndWait();
     }
 
+    /**
+     * Return the stage
+     * @param stage 
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
