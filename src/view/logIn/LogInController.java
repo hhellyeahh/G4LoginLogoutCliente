@@ -9,15 +9,19 @@ import view.logOut.LogOutController;
 import classes.*;
 import factories.FactoryClient;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -27,6 +31,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import view.signUp.SignUpController;
 
 /**
@@ -66,10 +71,32 @@ public class LogInController {
         tfUsername.setTooltip(new Tooltip("Username"));
         pfPassword.setTooltip(new Tooltip("Password"));
         hlSignUp.setTooltip(new Tooltip("Go to sign up"));
-
+    
         //Set event handlers
         this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
+        
+        /**
+         * this event is to ask for confirmation whenever a user press the 
+         * "X" button on the stage in order to ask for confirmation
+         * if the user press yes the app will close, if its says no, this event
+         * will be consumed and the app will continue normally
+         */
+        stage.setOnCloseRequest((WindowEvent evt) -> {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+    Alert alert = new Alert(AlertType.NONE, "Do you want to log out or exit the application?", yes, no);
+    alert.setTitle("Do you wish to exit?");
+     Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.get() == yes) {
+                 Platform.exit();
+        } else if (option.get() == no) {
+            evt.consume();
+        }
+   
+    
+});
 
         /**
          * Do not allow input spaces, when the user writes a space a red text
@@ -171,11 +198,11 @@ public class LogInController {
     private void handleLogInButtonAction(ActionEvent event) throws IOException, Exception {
 
         try {
-            LOGGER.info("inicio de envio información al servidor");
+            
             User loginUser = new User();
             loginUser.setLogin(tfUsername.getText());
             loginUser.setPassword(pfPassword.getText());
-
+            LOGGER.info("Logging in user: " + tfUsername.getText()); // CHANGED THE LOGGER 
             LoginLogout clientLoginLogout = null;
 
             try {
@@ -215,6 +242,7 @@ public class LogInController {
      */
     protected void showErrorAlert(String errorMsg) {
         //Shows error dialog.
+        LOGGER.severe(errorMsg); //LOGGED A SEVERE WITH THE ERRORMSG
         Alert alert = new Alert(Alert.AlertType.ERROR, errorMsg, ButtonType.OK);
         alert.showAndWait();
     }
@@ -226,5 +254,7 @@ public class LogInController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    
+    
 
 }

@@ -8,6 +8,7 @@ package view.logOut;
 import classes.User;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ import javafx.stage.Stage;
  * @author LeireyZulu
  */
 public class LogOutController {
-
+    private static final Logger LOGGER = Logger.getLogger("view");
     private Stage stage;
     private User user;
 
@@ -41,12 +42,15 @@ public class LogOutController {
     private Button btnLogOut;
     @FXML
     private Pane pnLogOut;
+       
+
 
     /**
      * Method for initializing Logout Stage. 
      * @param root The Parent object representing root node of view graph.
      */
     public void initialize(Parent root) {
+        LOGGER.info("User: " + user.getLogin() + " successfully logged in");
         //Tooltips
         this.tfMessage.setTooltip(new Tooltip("Message"));
         this.btnLogOut.setTooltip(new Tooltip("Log Out"));
