@@ -32,14 +32,14 @@ import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignUpControllerTest extends ApplicationTest {
-    
+
     private TextField tfUsername = lookup("#tfUsername").query();
-    
+
     private PasswordField pfPassword = lookup("#pfPassword").query();
     private PasswordField pfRepeatPassword = lookup("#pfRepeatPassword").query();
-    
+
     private Button btnContinue = lookup("#btnContinue").query();
-    
+
     private Label lblUsername = lookup("#lblUsername").query();
     private Label lblEmail = lookup("#lblEmail").query();
     private Label lblPassword = lookup("#lblPassword").query();
@@ -71,7 +71,7 @@ public class SignUpControllerTest extends ApplicationTest {
      * Test of initialize method, of class SignUpController.
      */
     @Test
-    //@Ignore
+    @Ignore
     public void Test_02_Initialize() {
 
         verifyThat("#tfUsername", hasText(""));
@@ -96,7 +96,7 @@ public class SignUpControllerTest extends ApplicationTest {
      * password or repeatpassword are empty.
      */
     @Test
-    //@Ignore
+    @Ignore
     public void Test_03_ContinueIsDisabled() {
 
         clickOn("#tfUsername");
@@ -132,9 +132,9 @@ public class SignUpControllerTest extends ApplicationTest {
      * password and repeatpassword are filled.
      */
     @Test
-    //@Ignore
+    @Ignore
     public void Test_04_ContinueIsEnabled() {
-        
+
         clickOn("#tfUsername");
         write("janamrai");
 
@@ -151,22 +151,22 @@ public class SignUpControllerTest extends ApplicationTest {
         write("abcd*1234");
 
         verifyThat("#btnContinue", isEnabled());
-        
+
         // Delete everything
         clickOn("#tfUsername");
         eraseText(8);
-        
+
         clickOn("#tfFullName");
         eraseText(9);
-        
+
         clickOn("#tfEmail");
         eraseText(24);
         clickOn("#tfEmail");
         eraseText(1);
-        
+
         clickOn("#pfPassword");
         eraseText(9);
-        
+
         clickOn("#pfRepeatPassword");
         eraseText(9);
     }
@@ -175,7 +175,7 @@ public class SignUpControllerTest extends ApplicationTest {
      * Test that labels Works
      */
     @Test
-    //@Ignore
+    @Ignore
     public void Test_05_LabelsWorks() {
 
         clickOn("#tfUsername");
@@ -201,6 +201,24 @@ public class SignUpControllerTest extends ApplicationTest {
         assertEquals(lblRepeatPassword.getText(), "We do not allow spaces in this field.");
         write("1234");
         assertEquals(lblRepeatPassword.getText(), "");
+
+        // Delete everything
+        clickOn("#tfUsername");
+        eraseText(9);
+
+        clickOn("#tfFullName");
+        eraseText(9);
+
+        clickOn("#tfEmail");
+        eraseText(24);
+        clickOn("#tfEmail");
+        eraseText(1);
+
+        clickOn("#pfPassword");
+        eraseText(9);
+
+        clickOn("#pfRepeatPassword");
+        eraseText(9);
     }
 
     /**
@@ -208,25 +226,81 @@ public class SignUpControllerTest extends ApplicationTest {
      */
     @Test
     //@Ignore
-    public void Test_06_SignUpWindowClosedOnContinueClick() {
-        
+    public void Test_06_UserRegistered() {
+
+        clickOn("#tfUsername");
+        write("janamrai");
+
         clickOn("#tfFullName");
         write("Janam Rai");
 
+        clickOn("#tfEmail");
+        write("lucasjanamsmile@gmail.com");
+
+        clickOn("#pfPassword");
+        write("abcd*1234");
+
+        clickOn("#pfRepeatPassword");
+        write("abcd*1234");
+
         clickOn("#btnContinue");
+        clickOn("Aceptar");
         verifyThat("#pnLogIn", isVisible());
+        //clickOn("#hlLogin");
+
+        // Delete everything
+        clickOn("#tfUsername");
+        eraseText(9);
+
+        clickOn("#tfFullName");
+        eraseText(9);
+
+        clickOn("#tfEmail");
+        eraseText(24);
+        clickOn("#tfEmail");
+        eraseText(1);
+
+        clickOn("#pfPassword");
+        eraseText(9);
+
+        clickOn("#pfRepeatPassword");
+        eraseText(9);
     }
-    
+
+    @Test
+    //@Ignore
+    public void Test_07_UserAlreadyExistsException() {
+
+        clickOn("#tfUsername");
+        write("janamrai");
+
+        clickOn("#tfFullName");
+        write("Janam Rai");
+
+        clickOn("#tfEmail");
+        write("lucasjanamsmile@gmail.com");
+
+        clickOn("#pfPassword");
+        write("abcd*1234");
+
+        clickOn("#pfRepeatPassword");
+        write("abcd*1234");
+
+        clickOn("#btnContinue");
+        clickOn("Aceptar");
+        verifyThat("User already exists", isVisible());
+    }
+
     /**
      * Test that Login window is opened when Login Hyperlink is clicked
      */
     @Test
-    //@Ignore
-    public void Test_07_LogInWindowOpenedOnLogInClick() {
+    @Ignore
+    public void Test_08_LogInWindowOpenedOnLogInClick() {
 
         clickOn("#hlLogin");
         verifyThat("#pnLogIn", isVisible());
-        
+
         clickOn("#hlSignUp");
         verifyThat("#pnSignUp", isVisible());
     }

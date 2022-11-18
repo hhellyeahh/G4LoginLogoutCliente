@@ -6,5 +6,5 @@
 package sockets;
 
 /**
- * This package contains all the resources for the view
+ * This package receive and sends messages
  */

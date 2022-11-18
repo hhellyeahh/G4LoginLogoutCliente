@@ -30,13 +30,16 @@ import javafx.stage.Stage;
 import view.signUp.SignUpController;
 
 /**
- *Controller UI class for Login view in users' management application. It contains 
- * event handlers and initialization code for the view defined in Login.fxml file.
+ * Controller UI class for Login view in users' management application. It
+ * contains event handlers and initialization code for the view defined in
+ * Login.fxml file.
+ *
  * @author LeireyZulu
  */
 public class LogInController {
 
     private Stage stage;
+    private User user;
     private static final Logger LOGGER = Logger.getLogger("view");
 
     @FXML
@@ -53,10 +56,10 @@ public class LogInController {
     private Button btnLogIn;
     @FXML
     private Pane pnLogIn;
-    
+
 
     /**
-     * Method for initializing Login Stage. 
+     * Method for initializing Login Stage.
      * @param root The Parent object representing root node of view graph.
      */
     public void initialize(Parent root) {
@@ -99,7 +102,7 @@ public class LogInController {
     }
 
     /**
-     * Text changed event handler. It validates that user and password fields 
+     * Text changed event handler. It validates that user and password fields
      * has any content to enable/disable LogIn button.
      * @param observable The value being observed.
      * @param oldValue The old value of the observable.
@@ -115,6 +118,9 @@ public class LogInController {
          */
         if (tfUsername.getText().length() > 20) {
             tfUsername.setText(tfUsername.getText().substring(0, 20));
+
+            //gets username field from successful signup
+            this.tfUsername.setText(user.getLogin());
         }
         if (pfPassword.getText().length() > 24) {
             pfPassword.setText(pfPassword.getText().substring(0, 24));
@@ -202,6 +208,7 @@ public class LogInController {
 
             tfUsername.setText("");
             pfPassword.setText("");
+
         } catch (Exception ex) {
             showErrorAlert(ex.getMessage());
             LOGGER.log(Level.SEVERE, ex.getMessage());
@@ -221,7 +228,7 @@ public class LogInController {
 
     /**
      * Return the stage
-     * @param stage 
+     * @param stage
      */
     public void setStage(Stage stage) {
         this.stage = stage;

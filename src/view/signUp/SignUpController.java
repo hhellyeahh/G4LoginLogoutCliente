@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,6 +29,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.logIn.LogInController;
+import view.logOut.LogOutController;
 
 /**
  *
@@ -36,6 +39,7 @@ import javafx.stage.Stage;
 public class SignUpController {
 
     private Stage stage;
+    private User user;
     private static final Logger LOGGER = Logger.getLogger("view");
 
     private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
@@ -156,8 +160,8 @@ public class SignUpController {
 
     /**
      *
-     * Validates that user, fullname, email, password, and repeatpassword fields has any content to enable/disable
-     * continue button.
+     * Validates that user, fullname, email, password, and repeatpassword fields
+     * has any content to enable/disable continue button.
      *
      * @param observable The value being observed.
      * @param oldValue The old value of the observable.
@@ -283,7 +287,7 @@ public class SignUpController {
         try {
             //The username (text field) and full name text field will not allow special characters
             if (!this.tfUsername.getText().matches(USERNAME_REGEX)) {
-                throw new Exception("Username field do not admit special characters.");
+                throw new Exception("Username field no special characters");
             }
             /**
              * The fullname text field and full name text field will not allow
@@ -292,15 +296,15 @@ public class SignUpController {
              * first surname.
              */
             if (!this.tfFullName.getText().trim().matches(FULLNAME_REGEX)) {
-                throw new Exception("Fullname field should be <name (space) surname>.");
+                throw new Exception("Fullname field should be Name and Surname");
             }
             //Email text field will be validated with an email pattern.
             if (!this.tfEmail.getText().matches(EMAIL_REGEX)) {
-                throw new Exception("Email field does not correspond. \nExample: example@example.example");
+                throw new Exception("Email should be name@name.com");
             }
             //Password field and repeat password password field will allow special characters.
             if (!this.pfPassword.getText().matches(PASSWORD_REGEX)) {
-                throw new Exception("The password can only use this special characters [@$!%*#?&]");
+                throw new Exception("Password need special characters[@$!%*#?&]");
             }
 
             //The information of all text fields will be collected, validated, and stored in an object of type User.
@@ -324,13 +328,23 @@ public class SignUpController {
             }
 
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
-            new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();;
 
             //Close the stage
             Stage stage = (Stage) this.btnContinue.getScene().getWindow();
             stage.close();
+
+
+            //gets username from signup correctly and focus on password field
+            this.tfUsername.setText(user.getLogin());
+            newUser.setPassword(tfUsername.getText());
+            pfPassword.requestFocus();
+
+            //password field apperrs in login window 
+            newUser.setPassword(pfPassword.getText());
+
         } catch (Exception e) {
-            //If there is any error, the exception that has been received will be managed by an alert.
+            //If there is any error,errors will be received and shows as alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
     }
