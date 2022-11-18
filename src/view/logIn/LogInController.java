@@ -30,12 +30,15 @@ import javafx.stage.Stage;
 import view.signUp.SignUpController;
 
 /**
- *Controller UI class for Login view in users' management application. It contains 
- * event handlers and initialization code for the view defined in Login.fxml file.
+ * Controller UI class for Login view in users' management application. It
+ * contains event handlers and initialization code for the view defined in
+ * Login.fxml file.
+ *
  * @author LeireyZulu
  */
 public class LogInController {
 
+    private User user;
     private Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
 
@@ -53,10 +56,10 @@ public class LogInController {
     private Button btnLogIn;
     @FXML
     private Pane pnLogIn;
-    
 
     /**
-     * Method for initializing Login Stage. 
+     * Method for initializing Login Stage.
+     *
      * @param root The Parent object representing root node of view graph.
      */
     public void initialize(Parent root) {
@@ -96,11 +99,13 @@ public class LogInController {
         //Disable login button.
         this.btnLogIn.setDisable(true);
         LOGGER.info("window initialized");
+        
     }
 
     /**
-     * Text changed event handler. It validates that user and password fields 
+     * Text changed event handler. It validates that user and password fields
      * has any content to enable/disable LogIn button.
+     *
      * @param observable The value being observed.
      * @param oldValue The old value of the observable.
      * @param newValue The new value of the observable.
@@ -132,7 +137,6 @@ public class LogInController {
         } else {
             this.btnLogIn.setDisable(false);
         }
-
     }
 
     /**
@@ -162,6 +166,7 @@ public class LogInController {
         }
     }
 
+    //TODO
     /**
      * Handle Action event on LogIn Button
      *
@@ -178,13 +183,8 @@ public class LogInController {
 
             LoginLogout clientLoginLogout = null;
 
-            try {
-                clientLoginLogout = FactoryClient.getLoginLogout();
-                loginUser = clientLoginLogout.logIn(loginUser);
-
-            } catch (Exception ex) {
-                throw new Exception(ex.getMessage());
-            }
+            clientLoginLogout = FactoryClient.getLoginLogout();
+            loginUser = clientLoginLogout.logIn(loginUser);
 
             Stage stage = new Stage();
 
@@ -211,6 +211,7 @@ public class LogInController {
 
     /**
      * Show error alert
+     *
      * @param errorMsg Receive error string
      */
     protected void showErrorAlert(String errorMsg) {
@@ -221,7 +222,8 @@ public class LogInController {
 
     /**
      * Return the stage
-     * @param stage 
+     *
+     * @param stage
      */
     public void setStage(Stage stage) {
         this.stage = stage;

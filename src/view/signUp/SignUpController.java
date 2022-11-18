@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.logIn.LogInController;
 
 /**
  *
@@ -35,7 +36,7 @@ import javafx.stage.Stage;
  */
 public class SignUpController {
 
-    private Stage stage;
+    public Stage stage;
     private static final Logger LOGGER = Logger.getLogger("view");
 
     private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
@@ -44,6 +45,8 @@ public class SignUpController {
     private static final String PASSWORD_REGEX = "^[A-Za-z\\d@$!%*#?&]{8,}$";
     private boolean passwordFieldCorrect = false;
     private boolean allFieldsFill = false;
+    
+    private User user;
 
     @FXML
     private TextField tfUsername;
@@ -279,7 +282,7 @@ public class SignUpController {
      *
      * @param event The action event object
      */
-    private void handleButtonContinueAction(ActionEvent event) {
+    public void handleButtonContinueAction(ActionEvent event) {
         try {
             //The username (text field) and full name text field will not allow special characters
             if (!this.tfUsername.getText().matches(USERNAME_REGEX)) {
@@ -324,11 +327,12 @@ public class SignUpController {
             }
 
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
-            new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
-
+            new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();            
+            
             //Close the stage
             Stage stage = (Stage) this.btnContinue.getScene().getWindow();
             stage.close();
+            
         } catch (Exception e) {
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
