@@ -85,9 +85,9 @@ public class LogInController {
         stage.setOnCloseRequest((WindowEvent evt) -> {
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-    Alert alert = new Alert(AlertType.NONE, "Do you want to log out or exit the application?", yes, no);
-    alert.setTitle("Do you wish to exit?");
-     Optional<ButtonType> option = alert.showAndWait();
+        Alert alert = new Alert(AlertType.NONE, "Do you want to log out or exit the application?", yes, no);
+        alert.setTitle("Do you wish to exit?");
+        Optional<ButtonType> option = alert.showAndWait();
 
         if (option.get() == yes) {
                  Platform.exit();
@@ -212,6 +212,7 @@ public class LogInController {
             } catch (Exception ex) {
                 throw new Exception(ex.getMessage());
             }
+        LOGGER.info("User: " + tfUsername.getText() + " successfully logged in"); //LOG INFO WHEN A USER LOGS IN SUCCESFULLY
 
             Stage stage = new Stage();
 
