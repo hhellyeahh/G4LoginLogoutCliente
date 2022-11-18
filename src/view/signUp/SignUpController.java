@@ -39,7 +39,7 @@ public class SignUpController {
     private static final Logger LOGGER = Logger.getLogger("view");
 
     private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
-    private static final String FULLNAME_REGEX = "^[a-zA-Z]{1,} [a-zA-Z]{1,}$";
+    private static final String FULLNAME_REGEX = "^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,}(?:\\s[a-zA-ZÀ-ÖØ-öø-ÿ]{1,})*)$";
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PASSWORD_REGEX = "^[A-Za-z\\d@$!%*#?&]{8,}$";
     private boolean passwordFieldCorrect = false;
@@ -156,8 +156,8 @@ public class SignUpController {
 
     /**
      *
-     * Validates that user, fullname, email, password, and repeatpassword fields has any content to enable/disable
-     * continue button.
+     * Validates that user, fullname, email, password, and repeatpassword fields
+     * has any content to enable/disable continue button.
      *
      * @param observable The value being observed.
      * @param oldValue The old value of the observable.
@@ -281,6 +281,9 @@ public class SignUpController {
      */
     private void handleButtonContinueAction(ActionEvent event) {
         try {
+            //Logger signin up user
+            LOGGER.log(Level.INFO, "Signin Up user: " + tfUsername.getText());
+            
             //The username (text field) and full name text field will not allow special characters
             if (!this.tfUsername.getText().matches(USERNAME_REGEX)) {
                 throw new Exception("Username field do not admit special characters.");
@@ -314,22 +317,22 @@ public class SignUpController {
 
             LoginLogout clientLoginLogout = null;
 
-            try {
-                clientLoginLogout = FactoryClient.getLoginLogout();
-                clientLoginLogout.signUp(newUser);
-
-            } catch (Exception ex) {
-                throw new Exception(ex.getMessage());
-                //LOGGER.log(Level.SEVERE, ex.getMessage());
-            }
-
+            clientLoginLogout = FactoryClient.getLoginLogout();
+            clientLoginLogout.signUp(newUser);
+            
             //It will show an alert that the user signed up correctly. We will close this window and open the login window.
             new Alert(Alert.AlertType.INFORMATION, "User created correctly", ButtonType.OK).showAndWait();
-
+            
+            //Logger successfull signinup user
+            LOGGER.log(Level.INFO, "User: " + tfUsername.getText() + " successfully signed up");
+            
             //Close the stage
             Stage stage = (Stage) this.btnContinue.getScene().getWindow();
             stage.close();
         } catch (Exception e) {
+            //Logger successfull signinup user
+            LOGGER.log(Level.SEVERE, e.getMessage());
+
             //If there is any error, the exception that has been received will be managed by an alert.
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
