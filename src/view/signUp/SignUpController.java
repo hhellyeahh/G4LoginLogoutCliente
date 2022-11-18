@@ -39,7 +39,7 @@ public class SignUpController {
     private static final Logger LOGGER = Logger.getLogger("view");
 
     private static final String USERNAME_REGEX = "^[a-zñÑA-Z0-9]*$";
-    private static final String FULLNAME_REGEX = "^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,}(?:\\s[a-zA-ZÀ-ÖØ-öø-ÿ]{1,})*)$";
+    private static final String FULLNAME_REGEX = "^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,}\\s[a-zA-ZÀ-ÖØ-öø-ÿ]{1,}(?:\\s[a-zA-ZÀ-ÖØ-öø-ÿ]{1,})*)$";
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PASSWORD_REGEX = "^[A-Za-z\\d@$!%*#?&]{8,}$";
     private boolean passwordFieldCorrect = false;
