@@ -5,6 +5,7 @@
  */
 package view.logIn;
 
+import entities.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,17 +41,19 @@ public class LogInController {
     private static final Logger LOGGER = Logger.getLogger("view");
 
     @FXML
-    private TextField tfUsername;
+    private TextField tfDNI;
     @FXML
-    private Label lblUsername;
+    private Label lblDNI;
     @FXML
     private PasswordField pfPassword;
     @FXML
     private Label lblPassword;
     @FXML
+    private Hyperlink hlRememberPassword;
+    @FXML
     private Hyperlink hlSignUp;
     @FXML
-    private Button btnLogIn;
+    private Button btnAccept;
     @FXML
     private Pane pnLogIn;
 
@@ -63,12 +66,12 @@ public class LogInController {
         LOGGER.info("initializing the window");
 
         //Tooltips
-        tfUsername.setTooltip(new Tooltip("Username"));
+        tfDNI.setTooltip(new Tooltip("DNI"));
         pfPassword.setTooltip(new Tooltip("Password"));
         hlSignUp.setTooltip(new Tooltip("Go to sign up"));
 
         //Set event handlers
-        this.tfUsername.textProperty().addListener(this::handleFieldsTextChange);
+        this.tfDNI.textProperty().addListener(this::handleFieldsTextChange);
         this.pfPassword.textProperty().addListener(this::handleFieldsTextChange);
 
         /**
@@ -76,10 +79,10 @@ public class LogInController {
          * will appear below the text field with a “We don't allow spaces in
          * this field.”, when another letter is written the text will disappear.
          */
-        tfUsername.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
+        tfDNI.addEventFilter(KeyEvent.KEY_TYPED, evt -> {
             if (" ".equals(evt.getCharacter())) {
                 evt.consume();
-                lblUsername.setText("We don't allow spaces in this field.");
+                lblDNI.setText("We don't allow spaces in this field.");
             }
         });
 
@@ -91,10 +94,10 @@ public class LogInController {
         });
 
         //Focus
-        tfUsername.requestFocus();
+        btnAccept.requestFocus();
 
         //Disable login button.
-        this.btnLogIn.setDisable(true);
+        this.btnAccept.setDisable(true);
         LOGGER.info("window initialized");
         
     }
@@ -112,27 +115,27 @@ public class LogInController {
             String newValue) {
 
         /**
-         * Maximum character permitted in username field will be 20, fullname
-         * and email 30 and password fields 8 minimum, 24 maximum
+         * Maximum character permitted in DNI field will be 9 
+         * and password fields 8 minimum, 24 maximum
          */
-        if (tfUsername.getText().length() > 20) {
-            tfUsername.setText(tfUsername.getText().substring(0, 20));
+        if (tfDNI.getText().length() > 9) {
+            tfDNI.setText(tfDNI.getText().substring(0, 9));
         }
         if (pfPassword.getText().length() > 24) {
             pfPassword.setText(pfPassword.getText().substring(0, 24));
         }
         //If any of these are empty the continue button will be disabled. 
         //If all of them are written it will be enabled.
-        if (!(this.tfUsername.getText().equals(oldValue)) || !(this.pfPassword.getText().equals(oldValue))) {
-            this.lblUsername.setText("");
+        if (!(this.tfDNI.getText().equals(oldValue)) || !(this.pfPassword.getText().equals(oldValue))) {
+            this.tfDNI.setText("");
             this.lblPassword.setText("");
         }
 
         //Enable login button.
-        if (tfUsername.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
-            this.btnLogIn.setDisable(true);
+        if (tfDNI.getText().isEmpty() || this.pfPassword.getText().isEmpty()) {
+            this.btnAccept.setDisable(true);
         } else {
-            this.btnLogIn.setDisable(false);
+            this.btnAccept.setDisable(false);
         }
     }
 
@@ -175,7 +178,7 @@ public class LogInController {
         try {
             LOGGER.info("inicio de envio información al servidor");
             User loginUser = new User();
-            loginUser.setLogin(tfUsername.getText());
+            loginUser.setLogin(tfDNI.getText());
             loginUser.setPassword(pfPassword.getText());
 
             LoginLogout clientLoginLogout = null;
@@ -197,7 +200,7 @@ public class LogInController {
 
             controller.initialize(root);
 
-            tfUsername.setText("");
+            tfDNI.setText("");
             pfPassword.setText("");
         } catch (Exception ex) {
             showErrorAlert(ex.getMessage());
