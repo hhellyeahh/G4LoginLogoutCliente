@@ -1,0 +1,9 @@
+package entities;
+
+public enum EnumMedType {
+    ANTIDEPRESSANTS,
+    ANTIANXIETYMEDICATIONS,
+    STIMULANTS,
+    ANTIPSYCHOTICS,
+    MOODSTABILIZERS;
+}
