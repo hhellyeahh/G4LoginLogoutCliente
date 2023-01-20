@@ -5,9 +5,15 @@
  */
 package view.mentalDisease;
 
+import entities.MentalDisease;
+import factories.MentalDiseaseFactory;
+import interfaces.MentalDiseaseInterface;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +27,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -33,6 +41,11 @@ public class MentalDisease1Controller {
 
     private static final Logger LOGGER = Logger.getLogger("view");
     private Stage stage;
+    private ObservableList<MentalDisease> mentalDiseaseData;
+    //iniciar factoria
+    MentalDiseaseFactory mentalFactory = new MentalDiseaseFactory();
+    //obtener mediante la factoria la interface
+    MentalDiseaseInterface mentalDiseaInterface = mentalFactory.getMentalDisease();
 
     @FXML
     private TableView tbvMentalDiseases;
@@ -56,9 +69,10 @@ public class MentalDisease1Controller {
      */
     public void initialize(Parent root) {
         LOGGER.info("Initializing the window");
-        
+
         // The window will be modal.
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Mental Disease 1");
 
         //Tooltips
         btnCreate.setTooltip(new Tooltip("Create"));
@@ -80,6 +94,31 @@ public class MentalDisease1Controller {
 
         LOGGER.info("window initialized");
 
+        this.tcID.setCellValueFactory(
+                new PropertyValueFactory<>("ID")
+        );
+        this.tcAdmin.setCellValueFactory(
+                new PropertyValueFactory<>("Admin")
+        );
+        this.tcName.setCellValueFactory(
+                new PropertyValueFactory<>("Name")
+        );
+        this.tcType.setCellValueFactory(
+                new PropertyValueFactory<>("Type")
+        );
+        this.tcDescription.setCellValueFactory(
+                new PropertyValueFactory<>("Description")
+        );
+        this.tcSymptoms.setCellValueFactory(
+                new PropertyValueFactory<>("Symptoms")
+        );
+        this.tcDate.setCellValueFactory(
+                new PropertyValueFactory<>("Date")
+        );
+        mentalDiseaseData = FXCollections.observableArrayList(mentalDiseaInterface.getAllMentalDiseases_XML(new GenericType<List<MentalDisease>>() {
+        }));
+        this.tbvMentalDiseases.setItems(mentalDiseaseData);
+        stage.show();
     }
 
     /**

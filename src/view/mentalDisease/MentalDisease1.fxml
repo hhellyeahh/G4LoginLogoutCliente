@@ -39,7 +39,7 @@
                 <TableColumn fx:id="tcName" editable="false" prefWidth="75.0" text="Name" />
                 <TableColumn fx:id="tcType" editable="false" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="tcDescription" editable="false" prefWidth="75.0" text="Description" />
-                <TableColumn fx:id="tcSymptons" editable="false" prefWidth="75.0" text="Symptons" />
+                <TableColumn fx:id="tcSymptoms" editable="false" prefWidth="75.0" text="Symptoms" />
                 <TableColumn fx:id="tcDate" editable="false" prefWidth="75.0" text="Date" />
             </columns>
         </TableView>
