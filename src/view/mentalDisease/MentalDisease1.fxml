@@ -10,48 +10,48 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pnMentalDisease1" prefHeight="491.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="pnMentalDisease1" prefHeight="600" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mentalDisease.MentalDisease1Controller">
     <children>
-        <ImageView fitHeight="363.0" fitWidth="708.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="198.0" fitWidth="809.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../resources/mentalDisease/Captura%20de%20pantalla%202023-01-12%20235946.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="288.0" fitWidth="708.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="250.0" fitWidth="850.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../resources/mentalDisease/Captura%20de%20pantalla%202023-01-12%20235946.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="413.0" fitWidth="708.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="231.0" fitWidth="850.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../resources/mentalDisease/Captura%20de%20pantalla%202023-01-12%20235946.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="501.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="610.0" fitWidth="146.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../resources/mentalDisease/Captura%20de%20pantalla%202023-01-13%20000202.png" />
             </image>
         </ImageView>
-        <TableView fx:id="tbvMentalDiseases" layoutX="142.0" layoutY="122.0" prefHeight="300.0" prefWidth="527.0">
+        <TableView fx:id="tbvMentalDiseases" layoutX="173.0" layoutY="120.0" prefHeight="411.0" prefWidth="635.0">
             <columns>
-                <TableColumn fx:id="tcID" editable="false" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="tcAdmin" editable="false" prefWidth="75.0" text="Admin" />
-                <TableColumn fx:id="tcName" editable="false" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="tcID" editable="false" minWidth="6.4000244140625" prefWidth="52.0" text="ID" />
+                <TableColumn fx:id="tcAdmin" editable="false" prefWidth="86.39994812011719" text="Admin" />
+                <TableColumn fx:id="tcName" editable="false" prefWidth="88.00006103515625" text="Name" />
                 <TableColumn fx:id="tcType" editable="false" prefWidth="75.0" text="Type" />
-                <TableColumn fx:id="tcDescription" editable="false" prefWidth="75.0" text="Description" />
-                <TableColumn fx:id="tcSymptoms" editable="false" prefWidth="75.0" text="Symptoms" />
-                <TableColumn fx:id="tcDate" editable="false" prefWidth="75.0" text="Date" />
+                <TableColumn fx:id="tcDescription" editable="false" prefWidth="113.60003662109375" text="Description" />
+                <TableColumn fx:id="tcSymptoms" editable="false" prefWidth="128.7999267578125" text="Symptoms" />
+                <TableColumn fx:id="tcDate" editable="false" prefWidth="92.0" text="Date" />
             </columns>
         </TableView>
-        <Button fx:id="btnModify" layoutX="373.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Modify" />
-        <RadioButton fx:id="rdbtnOrder" layoutX="612.0" layoutY="94.0" mnemonicParsing="false" text="Order" />
-        <TextField fx:id="txtfSearch" layoutX="145.0" layoutY="90.0" prefHeight="25.0" prefWidth="286.0" />
-        <Button fx:id="btnSearch" layoutX="438.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Search" />
-        <Button fx:id="btnSignOff" layoutX="25.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Sign off" />
-        <Button fx:id="btnDelete" layoutX="453.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Delete" />
-        <Button fx:id="btnCreate" layoutX="293.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Create" />
-        <ComboBox fx:id="cmbSearch" layoutX="511.0" layoutY="90.0" prefHeight="25.0" prefWidth="94.0" promptText="by ID" />
-        <Button fx:id="btnHome" layoutX="25.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Home" />
-        <Button fx:id="btnPrint" layoutX="606.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Print" />
+        <Button fx:id="btnModify" layoutX="465.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Modify" />
+        <RadioButton fx:id="rdbtnOrder" layoutX="749.0" layoutY="90.0" mnemonicParsing="false" text="Order" />
+        <TextField fx:id="txtfSearch" layoutX="173.0" layoutY="87.0" prefHeight="25.0" prefWidth="382.0" />
+        <Button fx:id="btnSearch" layoutX="563.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Search" />
+        <Button fx:id="btnSignOff" layoutX="28.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Sign off" />
+        <Button fx:id="btnDelete" layoutX="545.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Delete" />
+        <Button fx:id="btnCreate" onAction="#handleCreateButtonAction" layoutX="385.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Create" />
+        <ComboBox fx:id="cmbSearch" layoutX="639.0" layoutY="87.0" prefHeight="25.0" prefWidth="94.0" promptText="by ID" />
+        <Button fx:id="btnHome" layoutX="41.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Home" />
+        <Button fx:id="btnPrint" layoutX="743.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Print" />
     </children>
 </Pane>

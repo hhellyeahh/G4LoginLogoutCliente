@@ -8,13 +8,13 @@ package view.mentalDisease;
 import entities.MentalDisease;
 import factories.MentalDiseaseFactory;
 import interfaces.MentalDiseaseInterface;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,7 +45,7 @@ public class MentalDisease1Controller {
     //iniciar factoria
     MentalDiseaseFactory mentalFactory = new MentalDiseaseFactory();
     //obtener mediante la factoria la interface
-    MentalDiseaseInterface mentalDiseaInterface = mentalFactory.getMentalDisease();
+    MentalDiseaseInterface mentalDiseaseInterface = mentalFactory.getMentalDisease();
 
     @FXML
     private TableView tbvMentalDiseases;
@@ -71,7 +71,7 @@ public class MentalDisease1Controller {
         LOGGER.info("Initializing the window");
 
         // The window will be modal.
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Mental Disease 1");
 
         //Tooltips
@@ -95,27 +95,28 @@ public class MentalDisease1Controller {
         LOGGER.info("window initialized");
 
         this.tcID.setCellValueFactory(
-                new PropertyValueFactory<>("ID")
+                new PropertyValueFactory<>("idMentalDisease")
         );
         this.tcAdmin.setCellValueFactory(
-                new PropertyValueFactory<>("Admin")
+                new PropertyValueFactory<>("admin")
         );
         this.tcName.setCellValueFactory(
-                new PropertyValueFactory<>("Name")
+                new PropertyValueFactory<>("mdName")
         );
         this.tcType.setCellValueFactory(
-                new PropertyValueFactory<>("Type")
+                new PropertyValueFactory<>("mdType")
         );
         this.tcDescription.setCellValueFactory(
-                new PropertyValueFactory<>("Description")
+                new PropertyValueFactory<>("mdDescription")
         );
         this.tcSymptoms.setCellValueFactory(
-                new PropertyValueFactory<>("Symptoms")
+                new PropertyValueFactory<>("mdSympton")
         );
         this.tcDate.setCellValueFactory(
-                new PropertyValueFactory<>("Date")
+                new PropertyValueFactory<>("mdAddDate")
         );
-        mentalDiseaseData = FXCollections.observableArrayList(mentalDiseaInterface.getAllMentalDiseases_XML(new GenericType<List<MentalDisease>>() {
+
+        mentalDiseaseData = FXCollections.observableArrayList(mentalDiseaseInterface.getAllMentalDiseases_XML(new GenericType<List<MentalDisease>>() {
         }));
         this.tbvMentalDiseases.setItems(mentalDiseaseData);
         stage.show();
@@ -129,17 +130,13 @@ public class MentalDisease1Controller {
      */
     @FXML
     private void handleCreateButtonAction(ActionEvent event) throws IOException, Exception {
-        LOGGER.info("Probando a abrir ventana de registro");
+        LOGGER.info("Probando a abrir ventana mental disease 2");
         try {
-            Stage stage = new Stage();
-            FXMLLoader loader;
-            loader = new FXMLLoader(getClass().getResource("/view/mentalDisease/MentalDisease2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mentalDisease/MentalDisease2.fxml"));
             Parent root = (Parent) loader.load();
             MentalDisease2Controller controller = (MentalDisease2Controller) loader.getController();
             controller.setStage(stage);
             controller.initialize(root);
-
-            LOGGER.info("Ventana de mentaldisease abierta");
 
         } catch (IOException ex) {
             showErrorAlert("No se ha podido abrir la ventana");
@@ -166,5 +163,9 @@ public class MentalDisease1Controller {
      */
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @FXML
+    private void handleCreateButtonAction(javafx.event.ActionEvent event) {
     }
 }

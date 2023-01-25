@@ -14,6 +14,7 @@ public class Admin extends User {
      * Empty constructor
      */
     public Admin() {
+        super();
     }
 
     /**
@@ -33,6 +34,11 @@ public class Admin extends User {
 
     public void setMentalDisease(Set<MentalDisease> mentalDisease) {
         this.mentalDisease = mentalDisease;
+    }
+
+    @Override
+    public String toString() {
+        return super.getFullName();
     }
 
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="515.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="515.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mentalDisease.MentalDisease2Controller">
    <children>
       <MenuBar>
          <menus>
@@ -74,7 +74,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Pane prefHeight="491.0" prefWidth="710.0">
+      <Pane fx:id="pnMentalDisease2" prefHeight="491.0" prefWidth="710.0">
          <children>
             <ImageView fitHeight="363.0" fitWidth="708.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -96,7 +96,7 @@
                   <Image url="@../../resources/mentalDisease/Captura%20de%20pantalla%202023-01-13%20000202.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSignOff" layoutX="25.0" layoutY="369.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Sign off" />
+            <Button fx:id="btnSignOff" layoutX="25.0" layoutY="432.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Sign off" />
             <Button fx:id="btnHome" layoutX="25.0" layoutY="126.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Home" />
             <Button fx:id="btnGoBack" layoutX="25.0" layoutY="162.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Go back" />
             <Text fx:id="txtName" layoutX="169.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
