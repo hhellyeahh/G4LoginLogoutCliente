@@ -129,7 +129,7 @@ public class MentalDisease1Controller {
      * @param event The Action event object
      */
     @FXML
-    private void handleCreateButtonAction(ActionEvent event) throws IOException, Exception {
+    private void handleCreateButtonAction(javafx.event.ActionEvent event) throws IOException, Exception{
         LOGGER.info("Probando a abrir ventana mental disease 2");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mentalDisease/MentalDisease2.fxml"));
@@ -144,6 +144,7 @@ public class MentalDisease1Controller {
                     ex.getMessage());
         }
     }
+    
 
     /**
      * Show error alert
@@ -165,7 +166,5 @@ public class MentalDisease1Controller {
         this.stage = stage;
     }
 
-    @FXML
-    private void handleCreateButtonAction(javafx.event.ActionEvent event) {
-    }
+    
 }
